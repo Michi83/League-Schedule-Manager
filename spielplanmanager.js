@@ -1,4 +1,4 @@
-teams = ["A", "B", "C"]
+teams = []
 
 /*
  * Um einen Spielplan zu erstellen, geht man so vor:
