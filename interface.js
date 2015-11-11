@@ -4,7 +4,7 @@ var addTeam = function ()
     if (team !== "" && teams.indexOf(team) === -1)
     {
         teams.push(team)
-        updateTeamList()
+        updateTeams()
     }
     $("#new-team").val("")
 }
@@ -13,10 +13,10 @@ var deleteTeam = function (event)
 {
     var team = parseInt($(event.target).attr("data-team"))
     teams.splice(team, 1)
-    updateTeamList()
+    updateTeams()
 }
 
-var updateTeamList = function ()
+var updateTeams = function ()
 {
     $("#teams").empty()
     for (var i = 0; i < teams.length; i++)
@@ -27,10 +27,47 @@ var updateTeamList = function ()
     $(".delete-team").click(deleteTeam)
 }
 
+var updateMatches = function()
+{
+    $("#matches").empty()
+    for (var i = 0; i < matches.length; i++)
+    {
+        $("<h2>" + (i + 1) + ". Spieltag</h2>").appendTo("#matches")
+        var table = $("<table></table>").appendTo("#matches")
+        for (var j = 0; j < matches[i].length; j++)
+        {
+            var match = matches[i][j]
+            var tr = $("<tr></tr>").appendTo(table)
+            $("<td>" + match.homeTeam + "</td>").appendTo(tr)
+            $("<td>-</td>").appendTo(tr)
+            $("<td>" + match.awayTeam + "</td>").appendTo(tr)
+            var homeGoals = $("<td><input class=\"update-goals\" data-match=\"" + j + "\" data-matchday=\"" + i + "\" data-side=\"homeGoals\" min=\"0\" type=\"number\" /></td>").appendTo(tr)
+            if (match.homeGoals !== undefined)
+            {
+                $(homeGoals).val(match.homeGoals)
+            }
+            $("<td>:</td>").appendTo(tr)
+            var awayGoals = $("<td><input class=\"update-goals\" data-match=\"" + j + "\" data-matchday=\"" + i + "\" data-side=\"awayGoals\" min=\"0\" type=\"number\" /></td>").appendTo(tr)
+            if (match.awayGoals !== undefined)
+            {
+                $(awayGoals).val(match.awayGoals)
+            }
+        }
+    }
+}
+
 $(document).ready
 (
     function ()
     {
         $("#add-team").click(addTeam)
+        $("#generate-matches").click
+        (
+            function ()
+            {
+                generateMatches()
+                updateMatches()
+            }
+        )
     }
 )
