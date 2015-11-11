@@ -16,18 +16,7 @@ var deleteTeam = function (event)
     updateTeams()
 }
 
-var updateTeams = function ()
-{
-    $("#teams").empty()
-    for (var i = 0; i < teams.length; i++)
-    {
-        var team = teams[i]
-        $("<tr><td>" + team + "</td><td><input data-team=\"" + i + "\" class=\"delete-team\" type=\"button\" value=\"Löschen\" /></td></tr>").appendTo("#teams")
-    }
-    $(".delete-team").click(deleteTeam)
-}
-
-var updateMatches = function()
+var updateMatches = function ()
 {
     $("#matches").empty()
     for (var i = 0; i < matches.length; i++)
@@ -56,10 +45,28 @@ var updateMatches = function()
     }
 }
 
+var updateRounds = function ()
+{
+    rounds = parseInt($("#rounds").val())
+}
+
+var updateTeams = function ()
+{
+    $("#teams").empty()
+    for (var i = 0; i < teams.length; i++)
+    {
+        var team = teams[i]
+        $("<tr><td>" + team + "</td><td><input data-team=\"" + i + "\" class=\"delete-team\" type=\"button\" value=\"Löschen\" /></td></tr>").appendTo("#teams")
+    }
+    $(".delete-team").click(deleteTeam)
+}
+
 $(document).ready
 (
     function ()
     {
+        updateRounds()
+        $("#rounds").change(updateRounds)
         $("#add-team").click(addTeam)
         $("#generate-matches").click
         (

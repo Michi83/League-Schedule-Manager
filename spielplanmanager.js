@@ -14,7 +14,7 @@ teams = []
  * B-E  F-D  E-C  D-B  C-F
  * C-D  B-C  F-B  E-F  D-E
  *
- * Warum das funktioniert, kann man folgender Überlegung erkennen:
+ * Warum das funktioniert, kann man an folgender Überlegung erkennen:
  * - Im letzten Spiel eines Spieltages spielt man gegen die Mannschaften die
  *   eine Stelle entfernt sind.
  * - Im vorletzten Spiel eines Spieltages spielt man gegen die Mannschaften die
@@ -53,7 +53,7 @@ var generateMatches = function ()
         teams2.push(null)
     }
     matches = []
-    for (var matchday = 0; matchday < 2 * (teams2.length - 1); matchday++)
+    for (var matchday = 0; matchday < rounds * (teams2.length - 1); matchday++)
     {
         matches.push([])
         for (var match = 0; match < teams2.length / 2; match++)
@@ -74,14 +74,5 @@ var generateMatches = function ()
             }
         }
         teams2 = [teams2[0], teams2[teams2.length - 1]].concat(teams2.slice(1, teams2.length - 1))
-    }
-}
-
-generateMatches()
-for (var i = 0; i < matches.length; i++)
-{
-    for (var j = 0; j < matches[i].length; j++)
-    {
-        console.log(matches[i][j])
     }
 }
