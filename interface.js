@@ -1,3 +1,13 @@
+var addCriterium = function ()
+{
+    var criterium = $("#criterium").val()
+    if (criterium !== null)
+    {
+        criteria.push(criterium)
+        updateCriteria()
+    }
+}
+
 var addTeam = function ()
 {
     var team = $("#new-team").val()
@@ -14,6 +24,28 @@ var deleteTeam = function (event)
     var team = parseInt($(event.target).attr("data-team"))
     teams.splice(team, 1)
     updateTeams()
+}
+
+var updateCriteria = function ()
+{
+    $("#criteria").empty()
+    table = $("<table></table>").appendTo("#criteria")
+    for (var i = 0; i < criteria.length; i++)
+    {
+        var criterium = criteria[i]
+        $("<tr><td>" + criteriumNames[criterium] + "</td></tr>").appendTo(table)
+    }
+    $("<select id=\"criterium\"></select>").appendTo("#criteria")
+    for (var i = 0; i < allCriteria.length; i++)
+    {
+        var criterium = allCriteria[i]
+        if (criteria.indexOf(criterium) === -1)
+        {
+            $("<option value=\"" + criterium + "\">" + criteriumNames[criterium] + "</option>").appendTo("#criterium")
+        }
+    }
+    $("<input id=\"add-criterium\" type=\"button\" value=\"Kriterium hinzufügen\" />").appendTo("#criteria")
+    $("#add-criterium").click(addCriterium)
 }
 
 var updateMatches = function ()
@@ -68,6 +100,7 @@ $(document).ready
         updateRounds()
         $("#rounds").change(updateRounds)
         $("#add-team").click(addTeam)
+        updateCriteria()
         $("#generate-matches").click
         (
             function ()

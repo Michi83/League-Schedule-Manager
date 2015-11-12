@@ -1,4 +1,19 @@
 teams = []
+allCriteria = ["op", "ogd", "og", "oag", "ow", "h2hp", "h2hgd", "h2hg", "h2hag", "h2hw"]
+criteriumNames =
+{
+    op: "Punkte insgesamt",
+    ogd: "Tordifferenz insgesamt",
+    og: "Tore insgesamt",
+    oag: "Auswärtstore insgesamt",
+    ow: "Siege insgesamt",
+    h2hp: "Punkte im direkten Vergleich",
+    h2hgd: "Tordifferenz im direkten Vergleich",
+    h2hg: "Tore im direkten Vergleich",
+    h2hag: "Auswärtstore im direkten Vergleich",
+    h2hw: "Siege im direkten Vergleich",
+}
+criteria = []
 
 /*
  * Um einen Spielplan zu erstellen, geht man so vor:
