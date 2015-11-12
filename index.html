@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="spielplanmanager.css" rel="stylesheet">
         <meta charset="utf-8">
         <script src="jquery-1.11.3.min.js"></script>
         <script src="spielplanmanager.js"></script>
@@ -8,11 +9,14 @@
         <title>Spielplan-Manager</title>
     </head>
     <body>
+        <h1>Spielplan-Manager</h1>
         <label for="rounds">Anzahl Runden:</label>
         <input id="rounds" min="1" type="number" value="2" />
+        <h2>Mannschaften</h2>
         <table id="teams"></table>
         <input id="new-team" />
         <input id="add-team" type="button" value="Mannschaft hinzufügen" />
+        <h2>Tabellenkriterien</h2>
         <div id="criteria"></div>
         <div>
             <input id="generate-matches" type="button" value="Spielplan generieren" />
