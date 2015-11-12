@@ -19,6 +19,13 @@ var addTeam = function ()
     $("#new-team").val("")
 }
 
+var deleteCriterium = function (event)
+{
+    var criterium = parseInt($(event.target).attr("data-criterium"))
+    criteria.splice(criterium, 1)
+    updateCriteria()
+}
+
 var deleteTeam = function (event)
 {
     var team = parseInt($(event.target).attr("data-team"))
@@ -33,8 +40,11 @@ var updateCriteria = function ()
     for (var i = 0; i < criteria.length; i++)
     {
         var criterium = criteria[i]
-        $("<tr><td>" + criteriumNames[criterium] + "</td></tr>").appendTo(table)
+        var tr = $("<tr></tr>").appendTo(table)
+        $("<td>" + criteriumNames[criterium] + "</td>").appendTo(tr)
+        $("<td><input class=\"delete-criterium\" data-criterium=\"" + i + "\" type=\"button\" value=\"Löschen\"/></td>").appendTo(tr)
     }
+    $(".delete-criterium").click(deleteCriterium)
     $("<select id=\"criterium\"></select>").appendTo("#criteria")
     for (var i = 0; i < allCriteria.length; i++)
     {
