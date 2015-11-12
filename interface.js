@@ -33,6 +33,24 @@ var deleteTeam = function (event)
     updateTeams()
 }
 
+var moveCriteriumDown = function (event)
+{
+    var criterium = parseInt($(event.target).attr("data-criterium"))
+    var temp = criteria[criterium]
+    criteria[criterium] = criteria[criterium + 1]
+    criteria[criterium + 1] = temp
+    updateCriteria()
+}
+
+var moveCriteriumUp = function (event)
+{
+    var criterium = parseInt($(event.target).attr("data-criterium"))
+    var temp = criteria[criterium]
+    criteria[criterium] = criteria[criterium - 1]
+    criteria[criterium - 1] = temp
+    updateCriteria()
+}
+
 var updateCriteria = function ()
 {
     $("#criteria").empty()
@@ -42,8 +60,26 @@ var updateCriteria = function ()
         var criterium = criteria[i]
         var tr = $("<tr></tr>").appendTo(table)
         $("<td>" + criteriumNames[criterium] + "</td>").appendTo(tr)
+        if (i !== 0)
+        {
+            $("<td><input class=\"move-criterium-up\" data-criterium=\"" + i + "\" type=\"button\" value=\"↑\"/></td>").appendTo(tr)
+        }
+        else
+        {
+            $("<td></td>").appendTo(tr)
+        }
+        if (i !== criteria.length - 1)
+        {
+            $("<td><input class=\"move-criterium-down\" data-criterium=\"" + i + "\" type=\"button\" value=\"↓\"/></td>").appendTo(tr)
+        }
+        else
+        {
+            $("<td></td>").appendTo(tr)
+        }
         $("<td><input class=\"delete-criterium\" data-criterium=\"" + i + "\" type=\"button\" value=\"Löschen\"/></td>").appendTo(tr)
     }
+    $(".move-criterium-up").click(moveCriteriumUp)
+    $(".move-criterium-down").click(moveCriteriumDown)
     $(".delete-criterium").click(deleteCriterium)
     $("<select id=\"criterium\"></select>").appendTo("#criteria")
     for (var i = 0; i < allCriteria.length; i++)
