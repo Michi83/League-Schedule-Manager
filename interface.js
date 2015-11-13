@@ -94,6 +94,16 @@ var updateCriteria = function ()
     $("#add-criterium").click(addCriterium)
 }
 
+var updateGoals = function (event)
+{
+    var target = $(event.target)
+    var matchday = target.attr("data-matchday")
+    var match = target.attr("data-match")
+    var side = target.attr("data-side")
+    var goals = target.val()
+    matches[matchday][match][side] = goals
+}
+
 var updateMatches = function ()
 {
     $("#matches").empty()
@@ -121,6 +131,7 @@ var updateMatches = function ()
             }
         }
     }
+    $(".update-goals").change(updateGoals)
 }
 
 var updateRounds = function ()
