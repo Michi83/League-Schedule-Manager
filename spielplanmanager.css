@@ -1,6 +1,12 @@
 body
 {
+    font-family: Droid Sans, sans-serif;
     text-align: center
+}
+
+input[type=number]
+{
+    width: 50px;
 }
 
 table
