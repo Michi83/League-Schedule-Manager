@@ -97,15 +97,17 @@ var updateCriteria = function ()
 var updateGoals = function (event)
 {
     var target = $(event.target)
-    var matchday = target.attr("data-matchday")
-    var match = target.attr("data-match")
+    var matchday = parseInt(target.attr("data-matchday"))
+    var match = parseInt(target.attr("data-match"))
     var side = target.attr("data-side")
-    var goals = target.val()
+    var goals = parseInt(target.val())
     matches[matchday][match][side] = goals
+    calculateTables()
 }
 
 var updateMatches = function ()
 {
+    $("#options").hide()
     $("#matches").empty()
     for (var i = 0; i < matches.length; i++)
     {
@@ -130,13 +132,47 @@ var updateMatches = function ()
                 $(awayGoals).val(match.awayGoals)
             }
         }
+        $("<table class=\"table\" data-matchday=\"" + i + "\"></table>").appendTo("#matches")
     }
     $(".update-goals").change(updateGoals)
+    calculateTables()
 }
 
 var updateRounds = function ()
 {
     rounds = parseInt($("#rounds").val())
+}
+
+var updateTable = function (matchday, table)
+{
+    var htmlTable = $(".table[data-matchday=" + matchday + "]")
+    htmlTable.empty()
+    var tr = $("<tr></tr>").appendTo(htmlTable)
+    $("<th></th>").appendTo(tr)
+    $("<th></th>").appendTo(tr)
+    $("<th>S</th>").appendTo(tr)
+    $("<th>G</th>").appendTo(tr)
+    $("<th>U</th>").appendTo(tr)
+    $("<th>V</th>").appendTo(tr)
+    $("<th colspan=\"3\">Tore</th>").appendTo(tr)
+    $("<th>TD</th>").appendTo(tr)
+    $("<th>P</th>").appendTo(tr)
+    for (var i = 0; i < table.length; i++)
+    {
+        var team = table[i]
+        var tr = $("<tr></tr>").appendTo(htmlTable)
+        $("<td>" + team.place + ".</td>").appendTo(tr)
+        $("<td>" + team.team + "</td>").appendTo(tr)
+        $("<td>" + (team.won + team.drawn + team.lost) + "</td>").appendTo(tr)
+        $("<td>" + team.won + "</td>").appendTo(tr)
+        $("<td>" + team.drawn + "</td>").appendTo(tr)
+        $("<td>" + team.lost + "</td>").appendTo(tr)
+        $("<td>" + team.goalsFor + "</td>").appendTo(tr)
+        $("<td>:</td>").appendTo(tr)
+        $("<td>" + team.goalsAgainst + "</td>").appendTo(tr)
+        $("<td>" + (team.goalsFor - team.goalsAgainst) + "</td>").appendTo(tr)
+        $("<td>" + (3 * team.won + team.drawn) + "</td>").appendTo(tr)
+    }
 }
 
 var updateTeams = function ()
@@ -158,13 +194,6 @@ $(document).ready
         $("#rounds").change(updateRounds)
         $("#add-team").click(addTeam)
         updateCriteria()
-        $("#generate-matches").click
-        (
-            function ()
-            {
-                generateMatches()
-                updateMatches()
-            }
-        )
+        $("#generate-matches").click(generateMatches)
     }
 )

@@ -10,16 +10,18 @@
     </head>
     <body>
         <h1>Spielplan-Manager</h1>
-        <label for="rounds">Anzahl Runden:</label>
-        <input id="rounds" min="1" type="number" value="2" />
-        <h2>Mannschaften</h2>
-        <table id="teams"></table>
-        <input id="new-team" />
-        <input id="add-team" type="button" value="Mannschaft hinzufügen" />
-        <h2>Tabellenkriterien</h2>
-        <div id="criteria"></div>
-        <div>
-            <input id="generate-matches" type="button" value="Spielplan generieren" />
+        <div id="options">
+            <label for="rounds">Anzahl Runden:</label>
+            <input id="rounds" min="1" type="number" value="2" />
+            <h2>Mannschaften</h2>
+            <table id="teams"></table>
+            <input id="new-team" />
+            <input id="add-team" type="button" value="Mannschaft hinzufügen" />
+            <h2>Tabellenkriterien</h2>
+            <div id="criteria"></div>
+            <div>
+                <input id="generate-matches" type="button" value="Spielplan generieren" />
+            </div>
         </div>
         <div id="matches"></div>
     </body>
