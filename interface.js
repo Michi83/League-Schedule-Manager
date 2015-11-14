@@ -51,6 +51,34 @@ var moveCriteriumUp = function (event)
     updateCriteria()
 }
 
+var new_ = function ()
+{
+    $("#start").hide()
+    $("#options").show()
+    updateRounds()
+    $("#rounds").change(updateRounds)
+    $("#add-team").click(addTeam)
+    updateCriteria()
+    $("#generate-matches").click(generateMatches)
+}
+
+var open = function ()
+{
+    var file = document.getElementById("file").files[0]
+    var reader = new FileReader()
+    reader.onload = function ()
+    {
+        var data = reader.result
+        data = JSON.parse(data)
+        teams = data.teams
+        matches = data.matches
+        criteria = data.criteria
+        $("#start").hide()
+        updateMatches()
+    }
+    reader.readAsText(file)
+}
+
 var save = function (event)
 {
     var data = {teams: teams, matches: matches, criteria: criteria}
@@ -128,16 +156,18 @@ var updateMatches = function ()
             $("<td>" + match.homeTeam + "</td>").appendTo(tr)
             $("<td>-</td>").appendTo(tr)
             $("<td>" + match.awayTeam + "</td>").appendTo(tr)
-            var homeGoals = $("<td><input class=\"update-goals\" data-match=\"" + j + "\" data-matchday=\"" + i + "\" data-side=\"homeGoals\" min=\"0\" type=\"number\" /></td>").appendTo(tr)
+            var td = $("<td></td>").appendTo(tr)
+            var homeGoals = $("<input class=\"update-goals\" data-match=\"" + j + "\" data-matchday=\"" + i + "\" data-side=\"homeGoals\" min=\"0\" type=\"number\" />").appendTo(td)
             if (match.homeGoals !== undefined)
             {
-                $(homeGoals).val(match.homeGoals)
+                homeGoals.val(match.homeGoals)
             }
             $("<td>:</td>").appendTo(tr)
-            var awayGoals = $("<td><input class=\"update-goals\" data-match=\"" + j + "\" data-matchday=\"" + i + "\" data-side=\"awayGoals\" min=\"0\" type=\"number\" /></td>").appendTo(tr)
+            var td = $("<td></td>").appendTo(tr)
+            var awayGoals = $("<input class=\"update-goals\" data-match=\"" + j + "\" data-matchday=\"" + i + "\" data-side=\"awayGoals\" min=\"0\" type=\"number\" />").appendTo(tr)
             if (match.awayGoals !== undefined)
             {
-                $(awayGoals).val(match.awayGoals)
+                awayGoals.val(match.awayGoals)
             }
         }
         $("<table class=\"table\" data-matchday=\"" + i + "\"></table>").appendTo("#matches")
@@ -200,10 +230,7 @@ $(document).ready
 (
     function ()
     {
-        updateRounds()
-        $("#rounds").change(updateRounds)
-        $("#add-team").click(addTeam)
-        updateCriteria()
-        $("#generate-matches").click(generateMatches)
+        $("#new").click(new_)
+        $("#open").click(open)
     }
 )
