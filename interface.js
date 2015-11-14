@@ -51,6 +51,14 @@ var moveCriteriumUp = function (event)
     updateCriteria()
 }
 
+var save = function (event)
+{
+    var data = {teams: teams, matches: matches, criteria: criteria}
+    data = JSON.stringify(data)
+    data = "data:application/json;base64," + btoa(data)
+    $(event.target).attr("href", data)
+}
+
 var updateCriteria = function ()
 {
     $("#criteria").empty()
@@ -134,7 +142,9 @@ var updateMatches = function ()
         }
         $("<table class=\"table\" data-matchday=\"" + i + "\"></table>").appendTo("#matches")
     }
+    $("<a download=\"spielplan.json\" href=\"\" id=\"save\">Spielplan speichern</a>").appendTo("#matches")
     $(".update-goals").change(updateGoals)
+    $("#save").click(save);
     calculateTables()
 }
 
