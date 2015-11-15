@@ -8,6 +8,16 @@ var addCriterium = function ()
     }
 }
 
+var addHeadToHeadCriterium = function ()
+{
+    var criterium = $("#head-to-head-criterium").val()
+    if (criterium !== null)
+    {
+        headToHeadCriteria.push(criterium)
+        updateHeadToHeadCriteria()
+    }
+}
+
 var addTeam = function ()
 {
     var team = $("#new-team").val()
@@ -24,6 +34,13 @@ var deleteCriterium = function (event)
     var criterium = parseInt($(event.target).attr("data-criterium"))
     criteria.splice(criterium, 1)
     updateCriteria()
+}
+
+var deleteHeadToHeadCriterium = function (event)
+{
+    var criterium = parseInt($(event.target).attr("data-criterium"))
+    headToHeadCriteria.splice(criterium, 1)
+    updateHeadToHeadCriteria()
 }
 
 var deleteTeam = function (event)
@@ -51,6 +68,24 @@ var moveCriteriumUp = function (event)
     updateCriteria()
 }
 
+var moveHeadToHeadCriteriumDown = function (event)
+{
+    var criterium = parseInt($(event.target).attr("data-criterium"))
+    var temp = headToHeadCriteria[criterium]
+    headToHeadCriteria[criterium] = headToHeadCriteria[criterium + 1]
+    headToHeadCriteria[criterium + 1] = temp
+    updateHeadToHeadCriteria()
+}
+
+var moveHeadToHeadCriteriumUp = function (event)
+{
+    var criterium = parseInt($(event.target).attr("data-criterium"))
+    var temp = headToHeadCriteria[criterium]
+    headToHeadCriteria[criterium] = headToHeadCriteria[criterium - 1]
+    headToHeadCriteria[criterium - 1] = temp
+    updateHeadToHeadCriteria()
+}
+
 var new_ = function ()
 {
     $("#start").hide()
@@ -59,6 +94,7 @@ var new_ = function ()
     $("#rounds").change(updateRounds)
     $("#add-team").click(addTeam)
     updateCriteria()
+    updateHeadToHeadCriteria()
     $("#generate-matches").click(generateMatches)
 }
 
@@ -73,6 +109,7 @@ var open = function ()
         teams = data.teams
         matches = data.matches
         criteria = data.criteria
+        headToHeadCriteria = data.headToHeadCriteria
         $("#start").hide()
         updateMatches()
     }
@@ -81,7 +118,7 @@ var open = function ()
 
 var save = function (event)
 {
-    var data = {teams: teams, matches: matches, criteria: criteria}
+    var data = {teams: teams, matches: matches, criteria: criteria, headToHeadCriteria: headToHeadCriteria}
     data = JSON.stringify(data)
     data = "data:application/json;base64," + btoa(data)
     $(event.target).attr("href", data)
@@ -126,6 +163,10 @@ var updateCriteria = function ()
             $("<option value=\"" + criterium + "\">" + criteriumNames[criterium] + "</option>").appendTo("#criterium")
         }
     }
+    if (criteria.indexOf("head-to-head") === -1)
+    {
+        $("<option value=\"head-to-head\">direkter Vergleich</option>").appendTo("#criterium")
+    }
     $("<input id=\"add-criterium\" type=\"button\" value=\"Kriterium hinzufügen\" />").appendTo("#criteria")
     $("#add-criterium").click(addCriterium)
 }
@@ -139,6 +180,49 @@ var updateGoals = function (event)
     var goals = parseInt(target.val())
     matches[matchday][match][side] = goals
     calculateTables()
+}
+
+var updateHeadToHeadCriteria = function ()
+{
+    $("#head-to-head-criteria").empty()
+    table = $("<table></table>").appendTo("#head-to-head-criteria")
+    for (var i = 0; i < headToHeadCriteria.length; i++)
+    {
+        var criterium = headToHeadCriteria[i]
+        var tr = $("<tr></tr>").appendTo(table)
+        $("<td>" + criteriumNames[criterium] + "</td>").appendTo(tr)
+        if (i !== 0)
+        {
+            $("<td><input class=\"move-head-to-head-criterium-up\" data-criterium=\"" + i + "\" type=\"button\" value=\"↑\"/></td>").appendTo(tr)
+        }
+        else
+        {
+            $("<td></td>").appendTo(tr)
+        }
+        if (i !== headToHeadCriteria.length - 1)
+        {
+            $("<td><input class=\"move-head-to-head-criterium-down\" data-criterium=\"" + i + "\" type=\"button\" value=\"↓\"/></td>").appendTo(tr)
+        }
+        else
+        {
+            $("<td></td>").appendTo(tr)
+        }
+        $("<td><input class=\"delete-head-to-head-criterium\" data-criterium=\"" + i + "\" type=\"button\" value=\"Löschen\"/></td>").appendTo(tr)
+    }
+    $(".move-head-to-head-criterium-up").click(moveHeadToHeadCriteriumUp)
+    $(".move-head-to-head-criterium-down").click(moveHeadToHeadCriteriumDown)
+    $(".delete-head-to-head-criterium").click(deleteHeadToHeadCriterium)
+    $("<select id=\"head-to-head-criterium\"></select>").appendTo("#head-to-head-criteria")
+    for (var i = 0; i < allCriteria.length; i++)
+    {
+        var criterium = allCriteria[i]
+        if (headToHeadCriteria.indexOf(criterium) === -1)
+        {
+            $("<option value=\"" + criterium + "\">" + criteriumNames[criterium] + "</option>").appendTo("#head-to-head-criterium")
+        }
+    }
+    $("<input id=\"add-head-to-head-criterium\" type=\"button\" value=\"Kriterium hinzufügen\" />").appendTo("#head-to-head-criteria")
+    $("#add-head-to-head-criterium").click(addHeadToHeadCriterium)
 }
 
 var updateMatches = function ()
@@ -203,15 +287,15 @@ var updateTable = function (matchday, table)
         var tr = $("<tr></tr>").appendTo(htmlTable)
         $("<td>" + team.place + ".</td>").appendTo(tr)
         $("<td>" + team.team + "</td>").appendTo(tr)
-        $("<td>" + (team.won + team.drawn + team.lost) + "</td>").appendTo(tr)
+        $("<td>" + team.played + "</td>").appendTo(tr)
         $("<td>" + team.won + "</td>").appendTo(tr)
         $("<td>" + team.drawn + "</td>").appendTo(tr)
         $("<td>" + team.lost + "</td>").appendTo(tr)
         $("<td>" + team.goalsFor + "</td>").appendTo(tr)
         $("<td>:</td>").appendTo(tr)
         $("<td>" + team.goalsAgainst + "</td>").appendTo(tr)
-        $("<td>" + (team.goalsFor - team.goalsAgainst) + "</td>").appendTo(tr)
-        $("<td>" + (3 * team.won + team.drawn) + "</td>").appendTo(tr)
+        $("<td>" + team.goalDifference + "</td>").appendTo(tr)
+        $("<td>" + team.points + "</td>").appendTo(tr)
     }
 }
 
