@@ -3,6 +3,11 @@
     display: none;
 }
 
+.red
+{
+    color: #FF0000;
+}
+
 body
 {
     font-family: Droid Sans, sans-serif;

@@ -36,14 +36,43 @@ var updateMatchControl = function ()
             }
         }
         createButtons(i)
+        var teamFrequencies = {}
+        for (var j = 0; j < matches[i].length; j++)
+        {
+            var match = matches[i][j]
+            if (teamFrequencies[match.homeTeam] === undefined)
+            {
+                teamFrequencies[match.homeTeam] = 0
+            }
+            if (teamFrequencies[match.awayTeam] === undefined)
+            {
+                teamFrequencies[match.awayTeam] = 0
+            }
+            teamFrequencies[match.homeTeam]++
+            teamFrequencies[match.awayTeam]++
+        }
         var table = $("<table></table>").appendTo("#matches")
         for (var j = 0; j < matches[i].length; j++)
         {
             var match = matches[i][j]
             var tr = $("<tr></tr>").appendTo(table)
-            $("<td>" + match.homeTeam + "</td>").appendTo(tr)
+            if (teamFrequencies[match.homeTeam] > 1)
+            {
+                $("<td class=\"red\">" + match.homeTeam + "</td>").appendTo(tr)
+            }
+            else
+            {
+                $("<td>" + match.homeTeam + "</td>").appendTo(tr)
+            }
             $("<td>-</td>").appendTo(tr)
-            $("<td>" + match.awayTeam + "</td>").appendTo(tr)
+            if (teamFrequencies[match.awayTeam] > 1)
+            {
+                $("<td class=\"red\">" + match.awayTeam + "</td>").appendTo(tr)
+            }
+            else
+            {
+                $("<td>" + match.awayTeam + "</td>").appendTo(tr)
+            }
             var createButtons = function (i, j)
             {
                 var td
