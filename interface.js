@@ -1,21 +1,41 @@
-var updateGoals = function (event)
+var updateMatchControl = function ()
 {
-    var target = $(event.target)
-    var matchday = parseInt(target.attr("data-matchday"))
-    var match = parseInt(target.attr("data-match"))
-    var side = target.attr("data-side")
-    var goals = parseInt(target.val())
-    matches[matchday][match][side] = goals
-    calculateTables()
-}
-
-var updateMatches = function ()
-{
-    $("#options").hide()
     $("#matches").empty()
     for (var i = 0; i < matches.length; i++)
     {
-        $("<h2>" + (i + 1) + ". Spieltag</h2>").appendTo("#matches")
+        var h2 = $("<h2>" + (i + 1) + ". Spieltag </h2>").appendTo("#matches")
+        var createButtons = function (i)
+        {
+            if (i !== 0)
+            {
+                var moveUpButton = $("<input type=\"button\" value=\"⇧\" />").appendTo(h2)
+                moveUpButton.click
+                (
+                    function ()
+                    {
+                        var temp = matches[i]
+                        matches[i] = matches[i - 1]
+                        matches[i - 1] = temp
+                        updateMatchControl()
+                    }
+                )
+            }
+            if (i !== matches.length - 1)
+            {
+                var moveDownButton = $("<input type=\"button\" value=\"⇩\" />").appendTo(h2)
+                moveDownButton.click
+                (
+                    function ()
+                    {
+                        var temp = matches[i]
+                        matches[i] = matches[i + 1]
+                        matches[i + 1] = temp
+                        updateMatchControl()
+                    }
+                )
+            }
+        }
+        createButtons(i)
         var table = $("<table></table>").appendTo("#matches")
         for (var j = 0; j < matches[i].length; j++)
         {
@@ -24,25 +44,46 @@ var updateMatches = function ()
             $("<td>" + match.homeTeam + "</td>").appendTo(tr)
             $("<td>-</td>").appendTo(tr)
             $("<td>" + match.awayTeam + "</td>").appendTo(tr)
-            var td = $("<td></td>").appendTo(tr)
-            var homeGoals = $("<input class=\"update-goals\" data-match=\"" + j + "\" data-matchday=\"" + i + "\" data-side=\"homeGoals\" min=\"0\" type=\"number\" />").appendTo(td)
-            if (match.homeGoals !== undefined)
+            var createButtons = function (i, j)
             {
-                homeGoals.val(match.homeGoals)
+                var td
+                td = $("<td></td>").appendTo(tr)
+                var homeGoalsInput = $("<input min=\"0\" type=\"number\" />").appendTo(tr)
+                homeGoalsInput.change
+                (
+                    function ()
+                    {
+                        matches[i][j].homeGoals = parseInt(homeGoalsInput.val())
+                        calculateTables()
+                    }
+                )
+                $("<td>:</td>").appendTo(tr)
+                td = $("<td></td>").appendTo(tr)
+                var awayGoalsInput = $("<input min=\"0\" type=\"number\" />").appendTo(tr)
+                awayGoalsInput.change
+                (
+                    function ()
+                    {
+                        matches[i][j].awayGoals = parseInt(awayGoalsInput.val())
+                        calculateTables()
+                    }
+                )
             }
-            $("<td>:</td>").appendTo(tr)
-            var td = $("<td></td>").appendTo(tr)
-            var awayGoals = $("<input class=\"update-goals\" data-match=\"" + j + "\" data-matchday=\"" + i + "\" data-side=\"awayGoals\" min=\"0\" type=\"number\" />").appendTo(tr)
-            if (match.awayGoals !== undefined)
-            {
-                awayGoals.val(match.awayGoals)
-            }
+            createButtons(i, j)
         }
         $("<table class=\"table\" data-matchday=\"" + i + "\"></table>").appendTo("#matches")
     }
-    $("<a download=\"spielplan.json\" href=\"\" id=\"save\">Spielplan speichern</a>").appendTo("#matches")
-    $(".update-goals").change(updateGoals)
-    $("#save").click(saveFile);
+    var downloadLink = $("<a download=\"spielplan.json\" href=\"\">Spielplan speichern</a>").appendTo("#matches")
+    downloadLink.click
+    (
+        function ()
+        {
+            var data = {teams: teams, matches: matches, criteria: criteria, headToHeadCriteria: headToHeadCriteria}
+            data = JSON.stringify(data)
+            data = "data:application/json;base64," + btoa(data)
+            downloadLink.attr("href", data)
+        }
+    )
     calculateTables()
 }
 

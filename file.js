@@ -46,11 +46,3 @@ var openFile = function ()
     }
     reader.readAsText(file)
 }
-
-var saveFile = function (event)
-{
-    var data = {teams: teams, matches: matches, criteria: criteria, headToHeadCriteria: headToHeadCriteria}
-    data = JSON.stringify(data)
-    data = "data:application/json;base64," + btoa(data)
-    $(event.target).attr("href", data)
-}

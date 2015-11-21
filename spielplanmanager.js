@@ -87,7 +87,8 @@ var generateMatches = function ()
         }
         teams2 = [teams2[0], teams2[teams2.length - 1]].concat(teams2.slice(1, teams2.length - 1))
     }
-    updateMatches()
+    $("#options").hide()
+    updateMatchControl()
 }
 
 /*
