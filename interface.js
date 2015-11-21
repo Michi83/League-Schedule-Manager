@@ -76,8 +76,13 @@ var updateMatchControl = function ()
             var createButtons = function (i, j)
             {
                 var td
+                var match = matches[i][j]
                 td = $("<td></td>").appendTo(tr)
                 var homeGoalsInput = $("<input min=\"0\" type=\"number\" />").appendTo(tr)
+                if (match.homeGoals !== undefined)
+                {
+                    homeGoalsInput.val(match.homeGoals)
+                }
                 homeGoalsInput.change
                 (
                     function ()
@@ -89,6 +94,10 @@ var updateMatchControl = function ()
                 $("<td>:</td>").appendTo(tr)
                 td = $("<td></td>").appendTo(tr)
                 var awayGoalsInput = $("<input min=\"0\" type=\"number\" />").appendTo(tr)
+                if (match.awayGoals !== undefined)
+                {
+                    awayGoalsInput.val(match.awayGoals)
+                }
                 awayGoalsInput.change
                 (
                     function ()
