@@ -173,6 +173,7 @@ var compareTeams = function (team1, team2, criteria, statistics)
 
 var calculateTables = function ()
 {
+    var tables = []
     var headToHeadIndex = criteria.indexOf("head-to-head")
     if (headToHeadIndex === -1)
     {
@@ -312,8 +313,10 @@ var calculateTables = function ()
                 }
             )
         }
-        updateTable(matchday, table)
+        tables.push(table)
+        //updateTable(matchday, table)
     }
+    updateTableControls(tables)
 }
 
 var calculateHeadToHeadTable = function (table, maxMatchday)

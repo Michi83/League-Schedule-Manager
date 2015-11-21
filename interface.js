@@ -25,49 +25,53 @@ var updateRounds = function ()
     rounds = parseInt($("#rounds").val())
 }
 
-var updateTable = function (matchday, table)
+var updateTableControls = function (tables)
 {
-    var htmlTable = $(".table[data-matchday=" + matchday + "]")
-    htmlTable.empty()
-    var tr = $("<tr></tr>").appendTo(htmlTable)
-    $("<th></th>").appendTo(tr)
-    $("<th></th>").appendTo(tr)
-    $("<th>S</th>").appendTo(tr)
-    $("<th>G</th>").appendTo(tr)
-    $("<th>U</th>").appendTo(tr)
-    $("<th>V</th>").appendTo(tr)
-    $("<th colspan=\"3\">Tore</th>").appendTo(tr)
-    $("<th>TD</th>").appendTo(tr)
-    $("<th>P</th>").appendTo(tr)
-    for (var i = 0; i < table.length; i++)
+    for (var i = 0; i < tables.length; i++)
     {
-        var team = table[i]
+        var table = tables[i]
+        var htmlTable = $(".table[data-matchday=" + i + "]")
+        htmlTable.empty()
         var tr = $("<tr></tr>").appendTo(htmlTable)
-        if (i === 0 || team.place !== table[i - 1].place)
+        $("<th></th>").appendTo(tr)
+        $("<th></th>").appendTo(tr)
+        $("<th>S</th>").appendTo(tr)
+        $("<th>G</th>").appendTo(tr)
+        $("<th>U</th>").appendTo(tr)
+        $("<th>V</th>").appendTo(tr)
+        $("<th colspan=\"3\">Tore</th>").appendTo(tr)
+        $("<th>TD</th>").appendTo(tr)
+        $("<th>P</th>").appendTo(tr)
+        for (var j = 0; j < table.length; j++)
         {
-            $("<td>" + team.place + ".</td>").appendTo(tr)
+            var team = table[j]
+            var tr = $("<tr></tr>").appendTo(htmlTable)
+            if (j === 0 || team.place !== table[j - 1].place)
+            {
+                $("<td>" + team.place + ".</td>").appendTo(tr)
+            }
+            else
+            {
+                $("<td></td>").appendTo(tr)
+            }
+            $("<td>" + team.team + "</td>").appendTo(tr)
+            $("<td>" + team.played + "</td>").appendTo(tr)
+            $("<td>" + team.won + "</td>").appendTo(tr)
+            $("<td>" + team.drawn + "</td>").appendTo(tr)
+            $("<td>" + team.lost + "</td>").appendTo(tr)
+            $("<td>" + team.goalsFor + "</td>").appendTo(tr)
+            $("<td>:</td>").appendTo(tr)
+            $("<td>" + team.goalsAgainst + "</td>").appendTo(tr)
+            if (team.goalDifference > 0)
+            {
+                $("<td>+" + team.goalDifference + "</td>").appendTo(tr)
+            }
+            else
+            {
+                $("<td>" + team.goalDifference + "</td>").appendTo(tr)
+            }
+            $("<td>" + team.points + "</td>").appendTo(tr)
         }
-        else
-        {
-            $("<td></td>").appendTo(tr)
-        }
-        $("<td>" + team.team + "</td>").appendTo(tr)
-        $("<td>" + team.played + "</td>").appendTo(tr)
-        $("<td>" + team.won + "</td>").appendTo(tr)
-        $("<td>" + team.drawn + "</td>").appendTo(tr)
-        $("<td>" + team.lost + "</td>").appendTo(tr)
-        $("<td>" + team.goalsFor + "</td>").appendTo(tr)
-        $("<td>:</td>").appendTo(tr)
-        $("<td>" + team.goalsAgainst + "</td>").appendTo(tr)
-        if (team.goalDifference > 0)
-        {
-            $("<td>+" + team.goalDifference + "</td>").appendTo(tr)
-        }
-        else
-        {
-            $("<td>" + team.goalDifference + "</td>").appendTo(tr)
-        }
-        $("<td>" + team.points + "</td>").appendTo(tr)
     }
 }
 
