@@ -106,46 +106,28 @@ var updateMatchControl = function ()
                         calculateTables()
                     }
                 )
-                td = $("<td></td>").appendTo(tr)
-                if (i !== 0 || j !== 0)
+                if (i !== 0)
                 {
+                    td = $("<td></td>").appendTo(tr)
                     var moveUpButton = $("<input type=\"button\" value=\"⇧\" />").appendTo(td)
                     moveUpButton.click
                     (
                         function ()
                         {
-                            if (j === 0)
-                            {
-                                matches[i - 1].push(matches[i].splice(0, 1)[0])
-                            }
-                            else
-                            {
-                                var temp = matches[i][j]
-                                matches[i][j] = matches[i][j - 1]
-                                matches[i][j - 1] = temp
-                            }
+                            matches[i - 1].push(matches[i].splice(j, 1)[0])
                             updateMatchControl()
                         }
                     )
                 }
-                td = $("<td></td>").appendTo(tr)
-                if (i !== matches.length - 1 || j !== matches[i].length - 1)
+                if (i !== matches.length - 1)
                 {
+                    td = $("<td></td>").appendTo(tr)
                     var moveDownButton = $("<input type=\"button\" value=\"⇩\" />").appendTo(td)
                     moveDownButton.click
                     (
                         function ()
                         {
-                            if (j === matches[i].length - 1)
-                            {
-                                matches[i + 1].splice(0, 0, matches[i].splice(j, 1)[0])
-                            }
-                            else
-                            {
-                                var temp = matches[i][j]
-                                matches[i][j] = matches[i][j + 1]
-                                matches[i][j + 1] = temp
-                            }
+                            matches[i + 1].push(matches[i].splice(j, 1)[0])
                             updateMatchControl()
                         }
                     )
