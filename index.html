@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <script src="lib/jquery/jquery-1.11.3.min.js"></script>
         <script src="spielplanmanager.js"></script>
+        <script src="array.js"></script>
         <script src="interface.js"></script>
         <title>Spielplan-Manager</title>
     </head>
@@ -28,9 +29,7 @@
             <label for="rounds">Anzahl Runden:</label>
             <input id="rounds" min="1" type="number" value="2" />
             <h2>Mannschaften</h2>
-            <table id="teams"></table>
-            <input id="new-team" />
-            <input id="add-team" type="button" value="Mannschaft hinzufügen" />
+            <div id="teams"></div>
             <h2>Tabellenkriterien</h2>
             <div id="criteria"></div>
             <h3>Kriterien im direkten Vergleich</h3>
