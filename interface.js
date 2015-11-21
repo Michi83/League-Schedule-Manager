@@ -71,6 +71,17 @@ var updateTableControls = function (tables)
                 $("<td>" + team.goalDifference + "</td>").appendTo(tr)
             }
             $("<td>" + team.points + "</td>").appendTo(tr)
+            if (i > 0)
+            {
+                if (team.change > 0)
+                {
+                    $("<td class=\"red\">⬇" + team.change + "</td>").appendTo(tr)
+                }
+                else if (team.change < 0)
+                {
+                    $("<td class=\"green\">⬆" + -team.change + "</td>").appendTo(tr)
+                }
+            }
         }
     }
 }

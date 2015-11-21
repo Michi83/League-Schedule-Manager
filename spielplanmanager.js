@@ -313,8 +313,25 @@ var calculateTables = function ()
                 }
             )
         }
+        // Platzänderungen
+        if (matchday > 0)
+        {
+            var previousTable = tables[matchday - 1]
+            for (var i = 0; i < table.length; i++)
+            {
+                var team = table[i]
+                for (var j = 0; j < previousTable.length; j++)
+                {
+                    var previousTeam = previousTable[j]
+                    if (team.team === previousTeam.team)
+                    {
+                        team.change = team.place - previousTeam.place
+                        break
+                    }
+                }
+            }
+        }
         tables.push(table)
-        //updateTable(matchday, table)
     }
     updateTableControls(tables)
 }
