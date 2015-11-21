@@ -1,60 +1,3 @@
-var new_ = function ()
-{
-    $("#start").hide()
-    $("#options").show()
-    updateRounds()
-    $("#rounds").change(updateRounds)
-    $("#teams").arrayControl
-    (
-        {
-            array: teams
-        }
-    )
-    $("#criteria").arrayControl
-    (
-        {
-            array: criteria,
-            elements: allCriteria.concat(["head-to-head"]),
-            elementNames: criteriumNames,
-        }
-    )
-    $("#head-to-head-criteria").arrayControl
-    (
-        {
-            array: headToHeadCriteria,
-            elements: allCriteria,
-            elementNames: criteriumNames,
-        }
-    )
-    $("#generate-matches").click(generateMatches)
-}
-
-var open = function ()
-{
-    var file = document.getElementById("file").files[0]
-    var reader = new FileReader()
-    reader.onload = function ()
-    {
-        var data = reader.result
-        data = JSON.parse(data)
-        teams = data.teams
-        matches = data.matches
-        criteria = data.criteria
-        headToHeadCriteria = data.headToHeadCriteria
-        $("#start").hide()
-        updateMatches()
-    }
-    reader.readAsText(file)
-}
-
-var save = function (event)
-{
-    var data = {teams: teams, matches: matches, criteria: criteria, headToHeadCriteria: headToHeadCriteria}
-    data = JSON.stringify(data)
-    data = "data:application/json;base64," + btoa(data)
-    $(event.target).attr("href", data)
-}
-
 var updateGoals = function (event)
 {
     var target = $(event.target)
@@ -99,7 +42,7 @@ var updateMatches = function ()
     }
     $("<a download=\"spielplan.json\" href=\"\" id=\"save\">Spielplan speichern</a>").appendTo("#matches")
     $(".update-goals").change(updateGoals)
-    $("#save").click(save);
+    $("#save").click(saveFile);
     calculateTables()
 }
 
@@ -144,7 +87,7 @@ $(document).ready
 (
     function ()
     {
-        $("#new").click(new_)
-        $("#open").click(open)
+        $("#new").click(newFile)
+        $("#open").click(openFile)
     }
 )
