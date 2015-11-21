@@ -4,7 +4,7 @@ Erstellt Spielpläne und Tabellen für Deine Fußball-Liga.
 Demo: http://michi83.github.io/Spielplan-Manager/
 
 ## Spielplan generieren
-Es können Jeder-gegen-jeden-Turniere mit beliebig vielen Runden generiert werden. Die Anzahl der Mannschaften kann ungerade sein, in diesem Fall hat an jedem Spieltag eine Mannschaft spielfrei. Meinstens, aber nicht immer, werden Mannschaften abwechselnd zu Hause und auswärts spielen.
+Es können Jeder-gegen-jeden-Turniere mit beliebig vielen Runden generiert werden. Die Anzahl der Mannschaften kann ungerade sein, in diesem Fall hat an jedem Spieltag eine Mannschaft spielfrei. Meistens, aber nicht immer, werden Mannschaften abwechselnd zu Hause und auswärts spielen.
 
 ## Tabellen berechnen
 Tabellen können nach folgenden Kriterien sortiert werden:

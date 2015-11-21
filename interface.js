@@ -21,7 +21,14 @@ var updateTable = function (matchday, table)
     {
         var team = table[i]
         var tr = $("<tr></tr>").appendTo(htmlTable)
-        $("<td>" + team.place + ".</td>").appendTo(tr)
+        if (i === 0 || team.place !== table[i - 1].place)
+        {
+            $("<td>" + team.place + ".</td>").appendTo(tr)
+        }
+        else
+        {
+            $("<td></td>").appendTo(tr)
+        }
         $("<td>" + team.team + "</td>").appendTo(tr)
         $("<td>" + team.played + "</td>").appendTo(tr)
         $("<td>" + team.won + "</td>").appendTo(tr)
@@ -30,7 +37,14 @@ var updateTable = function (matchday, table)
         $("<td>" + team.goalsFor + "</td>").appendTo(tr)
         $("<td>:</td>").appendTo(tr)
         $("<td>" + team.goalsAgainst + "</td>").appendTo(tr)
-        $("<td>" + team.goalDifference + "</td>").appendTo(tr)
+        if (team.goalDifference > 0)
+        {
+            $("<td>+" + team.goalDifference + "</td>").appendTo(tr)
+        }
+        else
+        {
+            $("<td>" + team.goalDifference + "</td>").appendTo(tr)
+        }
         $("<td>" + team.points + "</td>").appendTo(tr)
     }
 }
