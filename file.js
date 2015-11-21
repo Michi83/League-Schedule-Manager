@@ -1,7 +1,8 @@
 var newFile = function ()
 {
     $("#start").hide()
-    $("#options").show()
+    $(".options").show()
+    $("#criteria").show()
     updateRounds()
     $("#rounds").change(updateRounds)
     $("#teams").arrayControl
@@ -10,22 +11,7 @@ var newFile = function ()
             array: teams
         }
     )
-    $("#criteria").arrayControl
-    (
-        {
-            array: criteria,
-            elements: allCriteria.concat(["head-to-head"]),
-            elementNames: criteriumNames,
-        }
-    )
-    $("#head-to-head-criteria").arrayControl
-    (
-        {
-            array: headToHeadCriteria,
-            elements: allCriteria,
-            elementNames: criteriumNames,
-        }
-    )
+    initCriteriaControls()
     $("#generate-matches").click(generateMatches)
 }
 
@@ -42,7 +28,9 @@ var openFile = function ()
         criteria = data.criteria
         headToHeadCriteria = data.headToHeadCriteria
         $("#start").hide()
-        updateMatches()
+        initCriteriaControls()
+        $("#criteria").show()
+        updateMatchControl()
     }
     reader.readAsText(file)
 }

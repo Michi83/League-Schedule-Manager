@@ -4,6 +4,7 @@ $.fn.arrayControl = function (options)
     var container = this
     var elements = options.elements
     var elementNames = options.elementNames
+    var success = options.success
 
     var updateArrayControl = function ()
     {
@@ -108,6 +109,10 @@ $.fn.arrayControl = function (options)
                     }
                 )
             }
+        }
+        if (success !== undefined)
+        {
+            success()
         }
     }
 

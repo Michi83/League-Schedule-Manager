@@ -1,3 +1,25 @@
+var initCriteriaControls = function ()
+{
+    $("#overall-criteria").arrayControl
+    (
+        {
+            array: criteria,
+            elements: allCriteria.concat(["head-to-head"]),
+            elementNames: criteriumNames,
+            success: calculateTables
+        }
+    )
+    $("#head-to-head-criteria").arrayControl
+    (
+        {
+            array: headToHeadCriteria,
+            elements: allCriteria,
+            elementNames: criteriumNames,
+            success: calculateTables
+        }
+    )
+}
+
 var updateRounds = function ()
 {
     rounds = parseInt($("#rounds").val())
