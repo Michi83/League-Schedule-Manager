@@ -138,6 +138,7 @@ var loadMatchday = function (matchday)
 
 var updateMatchdayControl = function ()
 {
+    $("#matchdays").empty()
     var settings = $("<a href=\"#\">Einstellungen</a>").appendTo("#matchdays")
     settings.click(loadSettings)
     for (var i = 0; i < matches.length; i++)

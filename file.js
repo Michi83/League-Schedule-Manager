@@ -1,18 +1,3 @@
-var newFile = function ()
-{
-    $("#start").hide()
-    $(".options").show()
-    updateRounds()
-    $("#rounds").change(updateRounds)
-    $("#teams").arrayControl
-    (
-        {
-            array: teams
-        }
-    )
-    $("#generate-matches").click(generateMatches)
-}
-
 var openFile = function ()
 {
     var file = document.getElementById("file").files[0]

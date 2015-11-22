@@ -1,12 +1,7 @@
-#matchdays a
+.menu a
 {
     margin-left: 4px;
     margin-right: 4px;
-}
-
-.green
-{
-    color: #00FF00;
 }
 
 .options
@@ -22,7 +17,7 @@
 body
 {
     font-family: Droid Sans, sans-serif;
-    text-align: center
+    text-align: center;
 }
 
 input[type=number]
@@ -35,7 +30,7 @@ table
     margin: auto;
 }
 
-td
+/*td
 {
     text-align: left;
-}
+}*/

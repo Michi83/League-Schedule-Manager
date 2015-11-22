@@ -84,7 +84,33 @@ $(document).ready
 (
     function ()
     {
-        $("#new").click(newFile)
+        $("#new").click
+        (
+            function ()
+            {
+                $("#content").empty()
+                $("<h2>Neuer Spielplan</h2>").appendTo("#content")
+                $("<label for=\"rounds\">Anzahl Runden: </label>").appendTo("#content")
+                rounds = 2
+                var roundsInput = $("<input id=\"rounds\" min=\"1\" type=\"number\" value=\"2\" />").appendTo("#content")
+                roundsInput.change
+                (
+                    function (event)
+                    {
+                        rounds = parseInt($(event.target).val())
+                    }
+                )
+                teams = []
+                $("<h3>Mannschaften</h3>").appendTo("#content")
+                var teamsInput = $("<div id=\"teams\"></div>").appendTo("#content")
+                teamsInput.arrayControl({array: teams})
+                criteria = []
+                headToHeadCriteria = []
+                var generateButton = $("<input type=\"button\" value=\"Spielplan erzeugen\" />").appendTo("#content")
+                generateButton.click(generateMatches)
+                return false
+            }
+        )
         $("#open").click(openFile)
     }
 )

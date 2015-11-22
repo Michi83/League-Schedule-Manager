@@ -1,4 +1,3 @@
-teams = []
 allCriteria = ["points", "goal difference", "goals", "away goals", "won"]
 criteriumNames =
 {
@@ -9,8 +8,6 @@ criteriumNames =
     "won": "Siege",
     "head-to-head": "direkter Vergleich"
 }
-criteria = []
-headToHeadCriteria = []
 
 /*
  * Um einen Spielplan zu erstellen, geht man so vor:
