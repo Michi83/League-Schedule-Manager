@@ -76,7 +76,7 @@ $.fn.arrayControl = function (options)
                 function ()
                 {
                     var element = input.val()
-                    if (element !== "")
+                    if (element !== "" && array.indexOf(element) === -1)
                     {
                         array.push(element)
                         updateArrayControl()
