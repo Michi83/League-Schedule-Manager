@@ -191,7 +191,7 @@ var calculateTable = function (matchday)
     for (var i = 0; i <= matchday; i++)
     {
         // Erst mal Statistiken sammeln.
-        for (var j = 0; j < matches[matchday].length; j++)
+        for (var j = 0; j < matches[i].length; j++)
         {
             var match = matches[i][j]
             var homeTeam = match.homeTeam

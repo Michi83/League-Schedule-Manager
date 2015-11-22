@@ -46,26 +46,26 @@ var loadMatchday = function (matchday)
             if (matchday !== 0)
             {
                 td = $("<td></td>").appendTo(tr)
-                var moveUpButton = $("<input type=\"button\" value=\"⇧\" />").appendTo(td)
+                var moveUpButton = $("<input type=\"button\" value=\"⇦\" />").appendTo(td)
                 moveUpButton.click
                 (
                     function ()
                     {
-                        matches[matchday - 1].push(matches[i].splice(i, 1)[0])
-                        updateMatchControl()
+                        matches[matchday - 1].push(matches[matchday].splice(i, 1)[0])
+                        loadMatchday(matchday)
                     }
                 )
             }
             if (matchday !== matches.length - 1)
             {
                 td = $("<td></td>").appendTo(tr)
-                var moveDownButton = $("<input type=\"button\" value=\"⇩\" />").appendTo(td)
+                var moveDownButton = $("<input type=\"button\" value=\"⇨\" />").appendTo(td)
                 moveDownButton.click
                 (
                     function ()
                     {
-                        matches[matchday + 1].push(matches[i].splice(i, 1)[0])
-                        updateMatchControl()
+                        matches[matchday + 1].push(matches[matchday].splice(i, 1)[0])
+                        loadMatchday(matchday)
                     }
                 )
             }
