@@ -3,6 +3,12 @@
     display: none;
 }
 
+#matchdays a
+{
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
 .green
 {
     color: #00FF00;

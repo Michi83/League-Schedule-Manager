@@ -2,7 +2,6 @@ var newFile = function ()
 {
     $("#start").hide()
     $(".options").show()
-    $("#criteria").show()
     updateRounds()
     $("#rounds").change(updateRounds)
     $("#teams").arrayControl
@@ -11,7 +10,6 @@ var newFile = function ()
             array: teams
         }
     )
-    initCriteriaControls()
     $("#generate-matches").click(generateMatches)
 }
 
