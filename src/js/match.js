@@ -1,10 +1,10 @@
 var loadMatchday = function (matchday)
 {
     $("#content").empty()
-    var h2 = $("<h2>" + (matchday + 1) + ". Spieltag </h2>").appendTo("#content")
+    var h1 = $("<h1>" + (matchday + 1) + ". Spieltag </h1>").appendTo("#content")
     if (matchday !== 0)
     {
-        var moveUpButton = $("<input type=\"button\" value=\"⇦\" />").appendTo(h2)
+        var moveUpButton = $("<input type=\"button\" value=\"⇦\" />").appendTo(h1)
         moveUpButton.click
         (
             function ()
@@ -18,7 +18,7 @@ var loadMatchday = function (matchday)
     }
     if (matchday !== matches.length - 1)
     {
-        var moveDownButton = $("<input type=\"button\" value=\"⇨\" />").appendTo(h2)
+        var moveDownButton = $("<input type=\"button\" value=\"⇨\" />").appendTo(h1)
         moveDownButton.click
         (
             function ()
@@ -47,7 +47,7 @@ var loadMatchday = function (matchday)
         teamFrequencies[homeTeam]++
         teamFrequencies[awayTeam]++
     }
-    var table = $("<table></table>").appendTo("#content")
+    var table = $("<table class=\"table\"></table>").appendTo("#content")
     for (var i = 0; i < matches[matchday].length; i++)
     {
         var match = matches[matchday][i]
@@ -74,7 +74,7 @@ var loadMatchday = function (matchday)
             var match = matches[matchday][i]
             var td
             td = $("<td></td>").appendTo(tr)
-            var homeGoalsInput = $("<input min=\"0\" type=\"number\" />").appendTo(tr)
+            var homeGoalsInput = $("<input class=\"form-control\" min=\"0\" type=\"number\" />").appendTo(tr)
             if (match.homeGoals !== undefined)
             {
                 homeGoalsInput.val(match.homeGoals)
@@ -89,7 +89,7 @@ var loadMatchday = function (matchday)
             )
             $("<td>:</td>").appendTo(tr)
             td = $("<td></td>").appendTo(tr)
-            var awayGoalsInput = $("<input min=\"0\" type=\"number\" />").appendTo(tr)
+            var awayGoalsInput = $("<input class=\"form-control\" min=\"0\" type=\"number\" />").appendTo(tr)
             if (match.awayGoals !== undefined)
             {
                 awayGoalsInput.val(match.awayGoals)
@@ -131,7 +131,7 @@ var loadMatchday = function (matchday)
         }
         createButtons(matchday, i)
     }
-    $("<table id=\"table\"></table>").appendTo("#content")
+    $("<table class=\"table table-striped\" id=\"table\"></table>").appendTo("#content")
     calculateTable(matchday)
     return false
 }
@@ -139,14 +139,15 @@ var loadMatchday = function (matchday)
 var updateMatchdayControl = function ()
 {
     $("#matchdays").empty()
-    var settings = $("<a href=\"#\">Einstellungen</a>").appendTo("#matchdays")
+    var buttonGroup = $("<div class=\"btn-group\"></div>").appendTo("#matchdays")
+    var settings = $("<button class=\"btn btn-default\">Einstellungen</button>").appendTo(buttonGroup)
     settings.click(loadSettings)
     for (var i = 0; i < matches.length; i++)
     {
         var initMatchdayControl = function (i)
         {
-            var a = $("<a href=\"#\">" + (i + 1) + "</a>").appendTo("#matchdays")
-            a.click
+            var button = $("<button class=\"btn btn-default\">" + (i + 1) + "</button>").appendTo(buttonGroup)
+            button.click
             (
                 function ()
                 {

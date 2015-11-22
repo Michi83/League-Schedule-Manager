@@ -44,18 +44,18 @@ var updateTableControl = function (table)
         var tr = $("<tr></tr>").appendTo("#table")
         if (i === 0 || team.place !== table[i - 1].place)
         {
-            $("<td class=\"align-right\">" + team.place + ".</td>").appendTo(tr)
+            $("<td>" + team.place + ".</td>").appendTo(tr)
         }
         else
         {
             $("<td></td>").appendTo(tr)
         }
         $("<td>" + team.team + "</td>").appendTo(tr)
-        $("<td class=\"align-right\">" + team.played + "</td>").appendTo(tr)
-        $("<td class=\"align-right\">" + team.won + "</td>").appendTo(tr)
-        $("<td class=\"align-right\">" + team.drawn + "</td>").appendTo(tr)
-        $("<td class=\"align-right\">" + team.lost + "</td>").appendTo(tr)
-        $("<td class=\"align-right\">" + team.goalsFor + "</td>").appendTo(tr)
+        $("<td>" + team.played + "</td>").appendTo(tr)
+        $("<td>" + team.won + "</td>").appendTo(tr)
+        $("<td>" + team.drawn + "</td>").appendTo(tr)
+        $("<td>" + team.lost + "</td>").appendTo(tr)
+        $("<td>" + team.goalsFor + "</td>").appendTo(tr)
         $("<td>:</td>").appendTo(tr)
         $("<td>" + team.goalsAgainst + "</td>").appendTo(tr)
         if (team.goalDifference > 0)
@@ -64,16 +64,16 @@ var updateTableControl = function (table)
         }
         else
         {
-            $("<td class=\"align-right\">" + team.goalDifference + "</td>").appendTo(tr)
+            $("<td>" + team.goalDifference + "</td>").appendTo(tr)
         }
-        $("<td class=\"align-right\">" + team.points + "</td>").appendTo(tr)
+        $("<td>" + team.points + "</td>").appendTo(tr)
         if (team.change > 0)
         {
-            $("<td class=\"align-right red\">⬇" + team.change + "</td>").appendTo(tr)
+            $("<td>⬇" + team.change + "</td>").appendTo(tr)
         }
         else if (team.change < 0)
         {
-            $("<td class=\"align-right green\">⬆" + -team.change + "</td>").appendTo(tr)
+            $("<td>⬆" + -team.change + "</td>").appendTo(tr)
         }
     }
 }
