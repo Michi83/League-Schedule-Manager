@@ -29,7 +29,7 @@ $(document).ready
                 return false
             }
         )
-        
+
         $("#open").click
         (
             function ()
@@ -47,7 +47,7 @@ $(document).ready
                         reader.onload = function ()
                         {
                             var data = reader.result
-                            data = JSON.parse(data)
+                            data = JSON.parse(decodeURIComponent(data))
                             teams = data.teams
                             matches = data.matches
                             criteria = data.criteria
@@ -58,6 +58,18 @@ $(document).ready
                     }
                 )
                 return false
+            }
+        )
+
+        $("#save").click
+        (
+            function (event)
+            {
+                var data = {teams: teams, matches: matches, criteria: criteria, headToHeadCriteria: headToHeadCriteria}
+                data = JSON.stringify(data)
+                data = "data:application/json;base64," + btoa(encodeURIComponent(data))
+                $(event.target).attr("href", data)
+                return true
             }
         )
     }
