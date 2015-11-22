@@ -218,99 +218,128 @@ var calculateTable = function (matchday)
                 statistics[awayTeam].goalsAgainst += homeGoals
                 statistics[awayTeam].awayGoals += awayGoals
             }
+            if (i === matchday || i === matchday - 1)
+            {
+                // Jetzt setzen wir erst mal alle Mannschaften auf Platz 1.
+                var table = []
+                for (var k = 0; k < teams.length; k++)
+                {
+                    var team = teams[k]
+                    table.push
+                    (
+                        {
+                            place: 1,
+                            team: team,
+                            played: statistics[team].won + statistics[team].drawn + statistics[team].lost,
+                            won: statistics[team].won,
+                            drawn: statistics[team].drawn,
+                            lost: statistics[team].lost,
+                            goalsFor: statistics[team].goalsFor,
+                            goalsAgainst: statistics[team].goalsAgainst,
+                            goalDifference: statistics[team].goalsFor - statistics[team].goalsAgainst,
+                            points: 3 * statistics[team].won + statistics[team].drawn,
+                        }
+                    )
+                }
+                // Jetzt können wir die Mannschaften paarweise vergleichen nach den
+                // Kriterien vor dem direkten Vergleich. Die schlechtere Mannschaft
+                // rutscht dabei einen Platz ab. Anders gesagt: Der Platz einer
+                // Mannschaft ist die Anzahl der besseren Mannschaften + 1.
+                for (var k = 0; k < table.length; k++)
+                {
+                    var team1 = table[k]
+                    for (var l = k + 1; l < table.length; l++)
+                    {
+                        var team2 = table[l]
+                        var comparison = compareTeams(team1.team, team2.team, criteriaBefore, statistics)
+                        if (comparison > 0)
+                        {
+                            team2.place++
+                        }
+                        else if (comparison < 0)
+                        {
+                            team1.place++
+                        }
+                    }
+                }
+                // Jetzt sortieren wir die Mannschaften nach Platz.
+                table.sort
+                (
+                    function (team1, team2)
+                    {
+                        return team1.place - team2.place
+                    }
+                )
+                if (headToHeadIndex !== -1)
+                {
+                    // Wir suchen nach gleichrangigen Mannschaften und wenden den
+                    // direkten Vergleich an.
+                    for (var k = 0, l; k < table.length; k = l)
+                    {
+                        for (l = k + 1; l < table.length && table[k].place === table[l].place; l++)
+                        {
+                        }
+                        if (l - k > 1)
+                        {
+                            calculateHeadToHeadTable(table.slice(k, l), matchday)
+                        }
+                    }
+                    // Wir sortieren noch mal nach Platz.
+                    table.sort
+                    (
+                        function (team1, team2)
+                        {
+                            return team1.place - team2.place
+                        }
+                    )
+                    // Und wir suchen noch mal nach gleichrangigen Mannschaften und
+                    // wenden die Kriterien nach dem direkten Vergleich an.
+                    for (var k = 0, l; k < table.length; k = l)
+                    {
+                        for (l = k + 1; l < table.length && table[k].place === table[l].place; l++)
+                        {
+                        }
+                        if (l - k > 1)
+                        {
+                            calculateTableAfter(table.slice(k, l), statistics)
+                        }
+                    }
+                    // Und ein letztes Mal sortieren.
+                    table.sort
+                    (
+                        function (team1, team2)
+                        {
+                            return team1.place - team2.place
+                        }
+                    )
+                }
+                if (i === matchday)
+                {
+                    var currentTable = table
+                }
+                else
+                {
+                    var previousTable = table
+                }
+            }
         }
     }
-    // Jetzt setzen wir erst mal alle Mannschaften auf Platz 1.
-    var table = []
-    for (var i = 0; i < teams.length; i++)
+    // Platzveränderungen
+    if (matchday > 0)
     {
-        var team = teams[i]
-        table.push
-        (
-            {
-                place: 1,
-                team: team,
-                played: statistics[team].won + statistics[team].drawn + statistics[team].lost,
-                won: statistics[team].won,
-                drawn: statistics[team].drawn,
-                lost: statistics[team].lost,
-                goalsFor: statistics[team].goalsFor,
-                goalsAgainst: statistics[team].goalsAgainst,
-                goalDifference: statistics[team].goalsFor - statistics[team].goalsAgainst,
-                points: 3 * statistics[team].won + statistics[team].drawn,
-            }
-        )
-    }
-    // Jetzt können wir die Mannschaften paarweise vergleichen nach den
-    // Kriterien vor dem direkten Vergleich. Die schlechtere Mannschaft
-    // rutscht dabei einen Platz ab. Anders gesagt: Der Platz einer
-    // Mannschaft ist die Anzahl der besseren Mannschaften + 1.
-    for (var i = 0; i < table.length; i++)
-    {
-        var team1 = table[i]
-        for (var j = i + 1; j < table.length; j++)
+        var previousPlaces = {}
+        for (var i = 0; i < previousTable.length; i++)
         {
-            var team2 = table[j]
-            var comparison = compareTeams(team1.team, team2.team, criteriaBefore, statistics)
-            if (comparison > 0)
-            {
-                team2.place++
-            }
-            else if (comparison < 0)
-            {
-                team1.place++
-            }
+            var team = previousTable[i]
+            previousPlaces[team.team] = team.place
+        }
+        for (var i = 0; i < currentTable.length; i++)
+        {
+            var team = currentTable[i]
+            team.change = team.place - previousPlaces[team.team]
         }
     }
-    // Jetzt sortieren wir die Mannschaften nach Platz.
-    table.sort
-    (
-        function (team1, team2)
-        {
-            return team1.place - team2.place
-        }
-    )
-    if (headToHeadIndex !== -1)
-    {
-        // Wir suchen nach gleichrangigen Mannschaften und wenden den
-        // direkten Vergleich an.
-        for (var i = 0, j; i < table.length; i = j)
-        {
-            for (j = i + 1; j < table.length && table[i].place === table[j].place; j++)
-            {
-            }
-            if (j - i > 1)
-            {
-                calculateHeadToHeadTable(table.slice(i, j), matchday)
-            }
-        }
-        // Wir sortieren noch mal nach Platz.
-        table.sort
-        (
-            function (team1, team2)
-            {
-                return team1.place - team2.place
-            }
-        )
-        // Und wir suchen noch mal nach gleichrangigen Mannschaften und
-        // wenden die Kriterien nach dem direkten Vergleich an.
-        for (var i = 0, j; i < table.length; i = j)
-        {
-            for (j = i + 1; j < table.length && table[i].place === table[j].place; j++)
-            {
-            }
-            calculateTableAfter(table.slice(i, j), statistics)
-        }
-        // Und ein letztes Mal sortieren.
-        table.sort
-        (
-            function (team1, team2)
-            {
-                return team1.place - team2.place
-            }
-        )
-    }
-    updateTableControl(table)
+    updateTableControl(currentTable)
 }
 
 var calculateHeadToHeadTable = function (table, matchday)
