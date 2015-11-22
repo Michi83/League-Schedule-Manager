@@ -149,7 +149,7 @@ var updateMatchdayControl = function ()
             (
                 function ()
                 {
-                    loadMatchday(i)
+                    return loadMatchday(i)
                 }
             )
         }
