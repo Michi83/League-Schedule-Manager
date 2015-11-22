@@ -1,10 +1,11 @@
-allCriteria = ["points", "goal difference", "goals", "away goals", "won"]
+allCriteria = ["points", "goal difference", "goals", "away goals", "goal average", "won"]
 criteriumNames =
 {
     "points": "Punkte",
     "goal difference": "Tordifferenz",
     "goals": "Tore",
     "away goals": "Auswärtstore",
+    "goal average": "Torquotient",
     "won": "Siege",
     "head-to-head": "direkter Vergleich"
 }
@@ -153,6 +154,23 @@ var compareTeams = function (team1, team2, criteria, statistics)
             if (awayGoals1 !== awayGoals2)
             {
                 return awayGoals1 - awayGoals2
+            }
+        }
+        else if (criterium === "goal average")
+        {
+            var goalAverage1 = statistics[team1].goalsFor / statistics[team1].goalsAgainst
+            var goalAverage2 = statistics[team2].goalsFor / statistics[team2].goalsAgainst
+            if (isNaN(goalAverage1))
+            {
+                goalAverage1 = 1
+            }
+            if (isNaN(goalAverage2))
+            {
+                goalAverage2 = 1
+            }
+            if (goalAverage1 !== goalAverage2)
+            {
+                return goalAverage1 - goalAverage2
             }
         }
         else if (criterium === "won")

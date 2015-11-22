@@ -12,6 +12,7 @@ Tabellen können nach folgenden Kriterien sortiert werden:
 * Tordifferenz
 * Tore
 * Auswärtstore
+* Torquotient
 * Siege
 * direkter Vergleich
 
