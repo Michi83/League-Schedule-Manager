@@ -1,5 +1,11 @@
-var initCriteriaControls = function ()
+var loadSettings = function ()
 {
+    $("#content").empty()
+    $("<h2>Einstellungen</h2>").appendTo("#content")
+    $("<h3>Tabellenkriterien</h3>").appendTo("#content")
+    $("<div id=\"criteria\"></div>").appendTo("#content")
+    $("<h4>Kriterien im direkten Vergleich</h4>").appendTo("#content")
+    $("<div id=\"head-to-head-criteria\"></div>").appendTo("#content")
     $("#criteria").arrayControl
     (
         {
@@ -16,17 +22,6 @@ var initCriteriaControls = function ()
             elementNames: criteriumNames,
         }
     )
-}
-
-var loadSettings = function ()
-{
-    $("#content").empty()
-    $("<h2>Einstellungen</h2>").appendTo("#content")
-    $("<h3>Tabellenkriterien</h3>").appendTo("#content")
-    $("<div id=\"criteria\"></div>").appendTo("#content")
-    $("<h4>Kriterien im direkten Vergleich</h4>").appendTo("#content")
-    $("<div id=\"head-to-head-criteria\"></div>").appendTo("#content")
-    initCriteriaControls()
     return false
 }
 
@@ -79,38 +74,3 @@ var updateTableControl = function (table)
         $("<td>" + team.points + "</td>").appendTo(tr)
     }
 }
-
-$(document).ready
-(
-    function ()
-    {
-        $("#new").click
-        (
-            function ()
-            {
-                $("#content").empty()
-                $("<h2>Neuer Spielplan</h2>").appendTo("#content")
-                $("<label for=\"rounds\">Anzahl Runden: </label>").appendTo("#content")
-                rounds = 2
-                var roundsInput = $("<input id=\"rounds\" min=\"1\" type=\"number\" value=\"2\" />").appendTo("#content")
-                roundsInput.change
-                (
-                    function (event)
-                    {
-                        rounds = parseInt($(event.target).val())
-                    }
-                )
-                teams = []
-                $("<h3>Mannschaften</h3>").appendTo("#content")
-                var teamsInput = $("<div id=\"teams\"></div>").appendTo("#content")
-                teamsInput.arrayControl({array: teams})
-                criteria = []
-                headToHeadCriteria = []
-                var generateButton = $("<input type=\"button\" value=\"Spielplan erzeugen\" />").appendTo("#content")
-                generateButton.click(generateMatches)
-                return false
-            }
-        )
-        $("#open").click(openFile)
-    }
-)
