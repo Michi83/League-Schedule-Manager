@@ -1,7 +1,35 @@
 var loadMatchday = function (matchday)
 {
     $("#content").empty()
-    $("<h2>" + (matchday + 1) + ". Spieltag</h2>").appendTo("#content")
+    var h2 = $("<h2>" + (matchday + 1) + ". Spieltag </h2>").appendTo("#content")
+    if (matchday !== 0)
+    {
+        var moveUpButton = $("<input type=\"button\" value=\"⇦\" />").appendTo(h2)
+        moveUpButton.click
+        (
+            function ()
+            {
+                 var temp = matches[matchday]
+                 matches[matchday] = matches[matchday - 1]
+                 matches[matchday - 1] = temp
+                 loadMatchday(matchday)
+            }
+        )
+    }
+    if (matchday !== matches.length - 1)
+    {
+        var moveDownButton = $("<input type=\"button\" value=\"⇨\" />").appendTo(h2)
+        moveDownButton.click
+        (
+            function ()
+            {
+                 var temp = matches[matchday]
+                 matches[matchday] = matches[matchday + 1]
+                 matches[matchday + 1] = temp
+                 loadMatchday(matchday)
+            }
+        )
+    }
     var teamFrequencies = {}
     for (var i = 0; i < matches[matchday].length; i++)
     {
@@ -105,6 +133,7 @@ var loadMatchday = function (matchday)
     }
     $("<table id=\"table\"></table>").appendTo("#content")
     calculateTable(matchday)
+    return false
 }
 
 var updateMatchdayControl = function ()

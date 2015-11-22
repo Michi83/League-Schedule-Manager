@@ -27,6 +27,7 @@ var loadSettings = function ()
     $("<h4>Kriterien im direkten Vergleich</h4>").appendTo("#content")
     $("<div id=\"head-to-head-criteria\"></div>").appendTo("#content")
     initCriteriaControls()
+    return false
 }
 
 var updateRounds = function ()
