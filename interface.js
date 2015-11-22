@@ -25,11 +25,6 @@ var loadSettings = function ()
     return false
 }
 
-var updateRounds = function ()
-{
-    rounds = parseInt($("#rounds").val())
-}
-
 var updateTableControl = function (table)
 {
     $("#table").empty()
@@ -49,28 +44,28 @@ var updateTableControl = function (table)
         var tr = $("<tr></tr>").appendTo("#table")
         if (i === 0 || team.place !== table[i - 1].place)
         {
-            $("<td>" + team.place + ".</td>").appendTo(tr)
+            $("<td class=\"align-right\">" + team.place + ".</td>").appendTo(tr)
         }
         else
         {
             $("<td></td>").appendTo(tr)
         }
         $("<td>" + team.team + "</td>").appendTo(tr)
-        $("<td>" + team.played + "</td>").appendTo(tr)
-        $("<td>" + team.won + "</td>").appendTo(tr)
-        $("<td>" + team.drawn + "</td>").appendTo(tr)
-        $("<td>" + team.lost + "</td>").appendTo(tr)
-        $("<td>" + team.goalsFor + "</td>").appendTo(tr)
+        $("<td class=\"align-right\">" + team.played + "</td>").appendTo(tr)
+        $("<td class=\"align-right\">" + team.won + "</td>").appendTo(tr)
+        $("<td class=\"align-right\">" + team.drawn + "</td>").appendTo(tr)
+        $("<td class=\"align-right\">" + team.lost + "</td>").appendTo(tr)
+        $("<td class=\"align-right\">" + team.goalsFor + "</td>").appendTo(tr)
         $("<td>:</td>").appendTo(tr)
         $("<td>" + team.goalsAgainst + "</td>").appendTo(tr)
         if (team.goalDifference > 0)
         {
-            $("<td>+" + team.goalDifference + "</td>").appendTo(tr)
+            $("<td class=\"align-right\">+" + team.goalDifference + "</td>").appendTo(tr)
         }
         else
         {
-            $("<td>" + team.goalDifference + "</td>").appendTo(tr)
+            $("<td class=\"align-right\">" + team.goalDifference + "</td>").appendTo(tr)
         }
-        $("<td>" + team.points + "</td>").appendTo(tr)
+        $("<td class=\"align-right\">" + team.points + "</td>").appendTo(tr)
     }
 }

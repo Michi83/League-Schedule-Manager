@@ -67,7 +67,7 @@ $(document).ready
             {
                 var data = {teams: teams, matches: matches, criteria: criteria, headToHeadCriteria: headToHeadCriteria}
                 data = JSON.stringify(data)
-                data = "data:application/json;base64," + btoa(encodeURIComponent(data))
+                data = "data:application/json," + encodeURIComponent(data)
                 $(event.target).attr("href", data)
                 return true
             }

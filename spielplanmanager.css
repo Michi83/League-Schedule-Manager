@@ -1,3 +1,8 @@
+.align-right
+{
+    text-align: right;
+}
+
 .menu a
 {
     margin-left: 4px;
@@ -30,7 +35,7 @@ table
     margin: auto;
 }
 
-/*td
+td
 {
     text-align: left;
-}*/
+}
