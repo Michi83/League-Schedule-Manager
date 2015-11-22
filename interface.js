@@ -32,7 +32,7 @@ var updateTableControl = function (table)
     {
         var team = table[i]
         var tr = $("<tr></tr>").appendTo("#table")
-        $("<td>" + team.place + "</td>").appendTo(tr)
+        $("<td>" + team.place + ".</td>").appendTo(tr)
         $("<td>" + team.team + "</td>").appendTo(tr)
         $("<td>" + team.played + "</td>").appendTo(tr)
         $("<td>" + team.won + "</td>").appendTo(tr)
