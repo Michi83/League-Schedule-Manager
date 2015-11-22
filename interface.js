@@ -37,6 +37,16 @@ var updateRounds = function ()
 var updateTableControl = function (table)
 {
     $("#table").empty()
+    var tr = $("<tr></tr>").appendTo("#table")
+    $("<th></th>").appendTo(tr)
+    $("<th></th>").appendTo(tr)
+    $("<th>S</th>").appendTo(tr)
+    $("<th>G</th>").appendTo(tr)
+    $("<th>U</th>").appendTo(tr)
+    $("<th>V</th>").appendTo(tr)
+    $("<th colspan=\"3\">Tore</th>").appendTo(tr)
+    $("<th>TD</th>").appendTo(tr)
+    $("<th>P</th>").appendTo(tr)
     for (var i = 0; i < table.length; i++)
     {
         var team = table[i]
