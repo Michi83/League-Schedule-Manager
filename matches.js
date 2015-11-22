@@ -2,14 +2,45 @@ var loadMatchday = function (matchday)
 {
     $("#content").empty()
     $("<h2>" + (matchday + 1) + ". Spieltag</h2>").appendTo("#content")
+    var teamFrequencies = {}
+    for (var i = 0; i < matches[matchday].length; i++)
+    {
+        var match = matches[matchday][i]
+        var homeTeam = match.homeTeam
+        var awayTeam = match.awayTeam
+        if (teamFrequencies[homeTeam] === undefined)
+        {
+            teamFrequencies[homeTeam] = 0
+        }
+        if (teamFrequencies[awayTeam] === undefined)
+        {
+            teamFrequencies[awayTeam] = 0
+        }
+        teamFrequencies[homeTeam]++
+        teamFrequencies[awayTeam]++
+    }
     var table = $("<table></table>").appendTo("#content")
     for (var i = 0; i < matches[matchday].length; i++)
     {
         var match = matches[matchday][i]
         var tr = $("<tr></tr>").appendTo(table)
-        $("<td>" + match.homeTeam + "</td>").appendTo(tr)
+        if (teamFrequencies[match.homeTeam] > 1)
+        {
+            $("<td class=\"red\">" + match.homeTeam + "</td>").appendTo(tr)
+        }
+        else
+        {
+            $("<td>" + match.homeTeam + "</td>").appendTo(tr)
+        }
         $("<td>-</td>").appendTo(tr)
-        $("<td>" + match.awayTeam + "</td>").appendTo(tr)
+        if (teamFrequencies[match.awayTeam] > 1)
+        {
+            $("<td class=\"red\">" + match.awayTeam + "</td>").appendTo(tr)
+        }
+        else
+        {
+            $("<td>" + match.awayTeam + "</td>").appendTo(tr)
+        }
         var createButtons = function (matchday, i)
         {
             var match = matches[matchday][i]
