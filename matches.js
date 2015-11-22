@@ -78,7 +78,8 @@ var loadMatchday = function (matchday)
 
 var updateMatchdayControl = function ()
 {
-    $("<a href=\"#\">Einstellungen</a>").appendTo("#matchdays")
+    var settings = $("<a href=\"#\">Einstellungen</a>").appendTo("#matchdays")
+    settings.click(loadSettings)
     for (var i = 0; i < matches.length; i++)
     {
         var initMatchdayControl = function (i)
@@ -94,5 +95,5 @@ var updateMatchdayControl = function ()
         }
         initMatchdayControl(i)
     }
-    loadMatchday(0)
+    loadSettings()
 }
