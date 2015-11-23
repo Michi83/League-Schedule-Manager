@@ -47,7 +47,7 @@ var loadMatchday = function (matchday)
         teamFrequencies[homeTeam]++
         teamFrequencies[awayTeam]++
     }
-    var table = $("<table class=\"table\"></table>").appendTo("#content")
+    var table = $("<table class=\"form-inline table table-striped\"></table>").appendTo("#content")
     for (var i = 0; i < matches[matchday].length; i++)
     {
         var match = matches[matchday][i]
@@ -72,9 +72,10 @@ var loadMatchday = function (matchday)
         var createButtons = function (matchday, i)
         {
             var match = matches[matchday][i]
-            var td
+            var td, formGroup
             td = $("<td></td>").appendTo(tr)
-            var homeGoalsInput = $("<input class=\"form-control\" min=\"0\" type=\"number\" />").appendTo(tr)
+            formGroup = $("<div class=\"form-group\"></div>").appendTo(td)
+            var homeGoalsInput = $("<input class=\"form-control\" min=\"0\" type=\"number\" />").appendTo(formGroup)
             if (match.homeGoals !== undefined)
             {
                 homeGoalsInput.val(match.homeGoals)
@@ -89,7 +90,8 @@ var loadMatchday = function (matchday)
             )
             $("<td>:</td>").appendTo(tr)
             td = $("<td></td>").appendTo(tr)
-            var awayGoalsInput = $("<input class=\"form-control\" min=\"0\" type=\"number\" />").appendTo(tr)
+            formGroup = $("<div class=\"form-group\"></div>").appendTo(td)
+            var awayGoalsInput = $("<input class=\"form-control\" min=\"0\" type=\"number\" />").appendTo(formGroup)
             if (match.awayGoals !== undefined)
             {
                 awayGoalsInput.val(match.awayGoals)
@@ -131,6 +133,7 @@ var loadMatchday = function (matchday)
         }
         createButtons(matchday, i)
     }
+    $("<h2>Tabelle</h2>").appendTo("#content")
     $("<table class=\"table table-striped\" id=\"table\"></table>").appendTo("#content")
     calculateTable(matchday)
     return false
