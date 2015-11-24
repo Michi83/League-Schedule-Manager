@@ -6,7 +6,7 @@ var loadMatchday = function (matchday)
     var h1 = $("<h1>" + (matchday + 1) + ". Spieltag </h1>").appendTo(column)
     if (matchday !== 0)
     {
-        var moveUpButton = $("<input type=\"button\" value=\"⇦\" />").appendTo(h1)
+        var moveUpButton = $("<button class=\"btn btn-warning\">&larr;</button>").appendTo(h1)
         moveUpButton.click
         (
             function ()
@@ -18,9 +18,10 @@ var loadMatchday = function (matchday)
             }
         )
     }
+    $(document.createTextNode(" ")).appendTo(h1)
     if (matchday !== matches.length - 1)
     {
-        var moveDownButton = $("<input type=\"button\" value=\"⇨\" />").appendTo(h1)
+        var moveDownButton = $("<button class=\"btn btn-warning\">&rarr;</button>").appendTo(h1)
         moveDownButton.click
         (
             function ()
@@ -109,7 +110,7 @@ var loadMatchday = function (matchday)
             if (matchday !== 0)
             {
                 td = $("<td></td>").appendTo(tr)
-                var moveUpButton = $("<input type=\"button\" value=\"⇦\" />").appendTo(td)
+                var moveUpButton = $("<button class=\"btn btn-warning\">&larr;</button>").appendTo(td)
                 moveUpButton.click
                 (
                     function ()
@@ -122,7 +123,7 @@ var loadMatchday = function (matchday)
             if (matchday !== matches.length - 1)
             {
                 td = $("<td></td>").appendTo(tr)
-                var moveDownButton = $("<input type=\"button\" value=\"⇨\" />").appendTo(td)
+                var moveDownButton = $("<button class=\"btn btn-warning\">&rarr;</button>").appendTo(td)
                 moveDownButton.click
                 (
                     function ()
