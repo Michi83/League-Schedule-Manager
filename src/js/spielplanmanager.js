@@ -203,6 +203,7 @@ var calculateTable = function (matchday)
         var team = teams[i]
         statistics[team] = {won: 0, drawn: 0, lost: 0, goalsFor: 0, goalsAgainst: 0, awayGoals: 0}
     }
+    var currentTable, previousTable
     for (var i = 0; i <= matchday; i++)
     {
         // Erst mal Statistiken sammeln.
@@ -236,51 +237,76 @@ var calculateTable = function (matchday)
                 statistics[awayTeam].goalsAgainst += homeGoals
                 statistics[awayTeam].awayGoals += awayGoals
             }
-            if (i === matchday || i === matchday - 1)
+        }
+        // Wir erstellen Tabellen für den aktuellen und den vorherigen Spieltag.
+        // So können wir ausrechnen, wie sich die Plätze der Mannschaften verändert haben.
+        if (i === matchday || i === matchday - 1)
+        {
+            // Jetzt setzen wir erst mal alle Mannschaften auf Platz 1.
+            var table = []
+            for (var j = 0; j < teams.length; j++)
             {
-                // Jetzt setzen wir erst mal alle Mannschaften auf Platz 1.
-                var table = []
-                for (var k = 0; k < teams.length; k++)
-                {
-                    var team = teams[k]
-                    table.push
-                    (
-                        {
-                            place: 1,
-                            team: team,
-                            played: statistics[team].won + statistics[team].drawn + statistics[team].lost,
-                            won: statistics[team].won,
-                            drawn: statistics[team].drawn,
-                            lost: statistics[team].lost,
-                            goalsFor: statistics[team].goalsFor,
-                            goalsAgainst: statistics[team].goalsAgainst,
-                            goalDifference: statistics[team].goalsFor - statistics[team].goalsAgainst,
-                            points: 3 * statistics[team].won + statistics[team].drawn,
-                        }
-                    )
-                }
-                // Jetzt können wir die Mannschaften paarweise vergleichen nach den
-                // Kriterien vor dem direkten Vergleich. Die schlechtere Mannschaft
-                // rutscht dabei einen Platz ab. Anders gesagt: Der Platz einer
-                // Mannschaft ist die Anzahl der besseren Mannschaften + 1.
-                for (var k = 0; k < table.length; k++)
-                {
-                    var team1 = table[k]
-                    for (var l = k + 1; l < table.length; l++)
+                var team = teams[j]
+                table.push
+                (
                     {
-                        var team2 = table[l]
-                        var comparison = compareTeams(team1.team, team2.team, criteriaBefore, statistics)
-                        if (comparison > 0)
-                        {
-                            team2.place++
-                        }
-                        else if (comparison < 0)
-                        {
-                            team1.place++
-                        }
+                        place: 1,
+                        team: team,
+                        played: statistics[team].won + statistics[team].drawn + statistics[team].lost,
+                        won: statistics[team].won,
+                        drawn: statistics[team].drawn,
+                        lost: statistics[team].lost,
+                        goalsFor: statistics[team].goalsFor,
+                        goalsAgainst: statistics[team].goalsAgainst,
+                        goalDifference: statistics[team].goalsFor - statistics[team].goalsAgainst,
+                        points: 3 * statistics[team].won + statistics[team].drawn,
+                    }
+                )
+            }
+            // Jetzt können wir die Mannschaften paarweise vergleichen nach den
+            // Kriterien vor dem direkten Vergleich. Die schlechtere Mannschaft
+            // rutscht dabei einen Platz ab. Anders gesagt: Der Platz einer
+            // Mannschaft ist die Anzahl der besseren Mannschaften + 1.
+            for (var j = 0; j < table.length; j++)
+            {
+                var team1 = table[j]
+                for (var k = j + 1; k < table.length; k++)
+                {
+                    var team2 = table[k]
+                    var comparison = compareTeams(team1.team, team2.team, criteriaBefore, statistics)
+                    if (comparison > 0)
+                    {
+                        team2.place++
+                    }
+                    else if (comparison < 0)
+                    {
+                        team1.place++
                     }
                 }
-                // Jetzt sortieren wir die Mannschaften nach Platz.
+            }
+            // Jetzt sortieren wir die Mannschaften nach Platz.
+            table.sort
+            (
+                function (team1, team2)
+                {
+                    return team1.place - team2.place
+                }
+            )
+            if (headToHeadIndex !== -1)
+            {
+                // Wir suchen nach gleichrangigen Mannschaften und wenden den
+                // direkten Vergleich an.
+                for (var j = 0, k; j < table.length; j = k)
+                {
+                    for (k = j + 1; k < table.length && table[j].place === table[k].place; k++)
+                    {
+                    }
+                    if (k - j > 1)
+                    {
+                        calculateHeadToHeadTable(table.slice(j, k), matchday)
+                    }
+                }
+                // Wir sortieren noch mal nach Platz.
                 table.sort
                 (
                     function (team1, team2)
@@ -288,57 +314,34 @@ var calculateTable = function (matchday)
                         return team1.place - team2.place
                     }
                 )
-                if (headToHeadIndex !== -1)
+                // Und wir suchen noch mal nach gleichrangigen Mannschaften und
+                // wenden die Kriterien nach dem direkten Vergleich an.
+                for (var j = 0, k; j < table.length; j = k)
                 {
-                    // Wir suchen nach gleichrangigen Mannschaften und wenden den
-                    // direkten Vergleich an.
-                    for (var k = 0, l; k < table.length; k = l)
+                    for (k = j + 1; k < table.length && table[j].place === table[k].place; k++)
                     {
-                        for (l = k + 1; l < table.length && table[k].place === table[l].place; l++)
-                        {
-                        }
-                        if (l - k > 1)
-                        {
-                            calculateHeadToHeadTable(table.slice(k, l), matchday)
-                        }
                     }
-                    // Wir sortieren noch mal nach Platz.
-                    table.sort
-                    (
-                        function (team1, team2)
-                        {
-                            return team1.place - team2.place
-                        }
-                    )
-                    // Und wir suchen noch mal nach gleichrangigen Mannschaften und
-                    // wenden die Kriterien nach dem direkten Vergleich an.
-                    for (var k = 0, l; k < table.length; k = l)
+                    if (k - j > 1)
                     {
-                        for (l = k + 1; l < table.length && table[k].place === table[l].place; l++)
-                        {
-                        }
-                        if (l - k > 1)
-                        {
-                            calculateTableAfter(table.slice(k, l), statistics)
-                        }
+                        calculateTableAfter(table.slice(j, k), matchday)
                     }
-                    // Und ein letztes Mal sortieren.
-                    table.sort
-                    (
-                        function (team1, team2)
-                        {
-                            return team1.place - team2.place
-                        }
-                    )
                 }
-                if (i === matchday)
-                {
-                    var currentTable = table
-                }
-                else
-                {
-                    var previousTable = table
-                }
+                // Und ein letztes Mal sortieren.
+                table.sort
+                (
+                    function (team1, team2)
+                    {
+                        return team1.place - team2.place
+                    }
+                )
+            }
+            if (i === matchday)
+            {
+                currentTable = table
+            }
+            else
+            {
+                previousTable = table
             }
         }
     }
