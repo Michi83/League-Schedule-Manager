@@ -6,6 +6,7 @@ $(document).ready
         (
             function ()
             {
+                $("#matchdays").empty()
                 $("#content").empty()
                 var row, column
                 row = $("<div class=\"row\"></div>").appendTo("#content")
