@@ -138,29 +138,38 @@ var loadMatchday = function (matchday)
     $("<h2>Tabelle</h2>").appendTo(column)
     $("<table class=\"table table-striped\" id=\"table\"></table>").appendTo(column)
     calculateTable(matchday)
-    return false
 }
 
 var updateMatchdayControl = function ()
 {
     $("#matchdays").empty()
     var buttonGroup = $("<div class=\"btn-group\"></div>").appendTo("#matchdays")
-    var settings = $("<button class=\"btn btn-default\">Einstellungen</button>").appendTo(buttonGroup)
-    settings.click(loadSettings)
+    var settings = $("<button class=\"btn btn-default matchday-button\">Einstellungen</button>").appendTo(buttonGroup)
+    settings.click
+    (
+        function ()
+        {
+            $(".matchday-button").removeClass("active")
+            settings.addClass("active")
+            loadSettings()
+        }
+    )
     for (var i = 0; i < matches.length; i++)
     {
-        var initMatchdayControl = function (i)
+        var initMatchdayButton = function (i)
         {
-            var button = $("<button class=\"btn btn-default\">" + (i + 1) + "</button>").appendTo(buttonGroup)
+            var button = $("<button class=\"btn btn-default matchday-button\">" + (i + 1) + "</button>").appendTo(buttonGroup)
             button.click
             (
                 function ()
                 {
-                    return loadMatchday(i)
+                    $(".matchday-button").removeClass("active")
+                    button.addClass("active")
+                    loadMatchday(i)
                 }
             )
         }
-        initMatchdayControl(i)
+        initMatchdayButton(i)
     }
-    loadSettings()
+    settings.click()
 }

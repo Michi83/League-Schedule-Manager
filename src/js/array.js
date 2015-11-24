@@ -82,7 +82,8 @@ $.fn.arrayControl = function (options)
         if (elements === undefined)
         {
             var input = $("<input class=\"form-control\" />").appendTo(formGroup)
-            var addButton = $("<button class=\"btn btn-primary\">Hinzufügen</button>").appendTo(formInline)
+            $(document.createTextNode(" ")).appendTo(formInline)
+            var addButton = $("<button class=\"btn btn-success\">Hinzufügen</button>").appendTo(formInline)
             addButton.click
             (
                 function ()
@@ -110,7 +111,8 @@ $.fn.arrayControl = function (options)
                         $("<option value=\"" + element + "\">" + elementNames[element] + "</option>").appendTo(select)
                     }
                 }
-                var addButton = $("<button class=\"btn btn-primary\">Hinzufügen</button>").appendTo(formInline)
+                $(document.createTextNode(" ")).appendTo(formInline)
+                var addButton = $("<button class=\"btn btn-success\">Hinzufügen</button>").appendTo(formInline)
                 addButton.click
                 (
                     function ()
