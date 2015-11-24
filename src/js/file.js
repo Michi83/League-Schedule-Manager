@@ -28,6 +28,7 @@ $(document).ready
                 headToHeadCriteria = []
                 var generateButton = $("<input type=\"button\" value=\"Spielplan erzeugen\" />").appendTo(column)
                 generateButton.click(generateMatches)
+                return false
             }
         )
 
@@ -66,11 +67,18 @@ $(document).ready
         (
             function (event)
             {
-                var data = {teams: teams, matches: matches, criteria: criteria, headToHeadCriteria: headToHeadCriteria}
-                data = JSON.stringify(data)
-                data = "data:application/json," + encodeURIComponent(data)
-                $(event.target).attr("href", data)
-                return true
+                try
+                {
+                    var data = {teams: teams, matches: matches, criteria: criteria, headToHeadCriteria: headToHeadCriteria}
+                    data = JSON.stringify(data)
+                    data = "data:application/json," + encodeURIComponent(data)
+                    $(event.target).attr("href", data)
+                    return true
+                }
+                catch (exception)
+                {
+                    return false
+                }
             }
         )
     }
