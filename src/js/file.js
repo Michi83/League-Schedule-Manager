@@ -7,12 +7,19 @@ $(document).ready
             function ()
             {
                 $("#content").empty()
-                var row = $("<div class=\"row\"></div>").appendTo("#content")
-                var column = $("<div class=\"col-md-12\"></div>").appendTo(row)
+                var row, column
+                row = $("<div class=\"row\"></div>").appendTo("#content")
+                column = $("<div class=\"col-md-12\"></div>").appendTo(row)
                 $("<h1>Neuer Spielplan</h1>").appendTo(column)
-                $("<label for=\"rounds\">Anzahl Runden: </label>").appendTo(column)
+                row = $("<div class=\"row\"></div>").appendTo("#content")
+                column = $("<div class=\"col-md-6\"></div>").appendTo(row)
+                $("<h2>Einstellungen</h2>").appendTo(column)
+                var formInline = $("<div class=\"form-inline\"></div>").appendTo(column)
+                var formGroup = $("<div class=\"form-group\"></div>").appendTo(formInline)
+                $("<label for=\"rounds\">Anzahl Runden</label>").appendTo(formGroup)
+                $(document.createTextNode(" ")).appendTo(formGroup)
                 rounds = 2
-                var roundsInput = $("<input id=\"rounds\" min=\"1\" type=\"number\" value=\"2\" />").appendTo(column)
+                var roundsInput = $("<input class=\"form-control\" id=\"rounds\" min=\"1\" type=\"number\" value=\"2\" />").appendTo(formGroup)
                 roundsInput.change
                 (
                     function (event)
@@ -21,12 +28,15 @@ $(document).ready
                     }
                 )
                 teams = []
+                column = $("<div class=\"col-md-6\"></div>").appendTo(row)
                 $("<h2>Mannschaften</h2>").appendTo(column)
                 var teamsInput = $("<div id=\"teams\"></div>").appendTo(column)
                 teamsInput.arrayControl({array: teams})
                 criteria = []
                 headToHeadCriteria = []
-                var generateButton = $("<input type=\"button\" value=\"Spielplan erzeugen\" />").appendTo(column)
+                row = $("<div class=\"row\"></div>").appendTo("#content")
+                column = $("<div class=\"col-md-12\"></div>").appendTo(row)
+                var generateButton = $("<button class=\"btn btn-primary\">Spielplan generieren</button>").appendTo(column)
                 generateButton.click(generateMatches)
                 return false
             }
