@@ -1,11 +1,16 @@
 var loadSettings = function ()
 {
     $("#content").empty()
-    $("<h2>Einstellungen</h2>").appendTo("#content")
-    $("<h3>Tabellenkriterien</h3>").appendTo("#content")
-    $("<div id=\"criteria\"></div>").appendTo("#content")
-    $("<h4>Kriterien im direkten Vergleich</h4>").appendTo("#content")
-    $("<div id=\"head-to-head-criteria\"></div>").appendTo("#content")
+    var row = $("<div class=\"row\"></div>").appendTo("#content")
+    var column = $("<div class=\"col-md-12\"></div>").appendTo(row)
+    $("<h1>Einstellungen</h1>").appendTo(column)
+    row = $("<div class=\"row\"></div>").appendTo("#content")
+    column = $("<div class=\"col-md-6\"></div>").appendTo(row)
+    $("<h2>Tabellenkriterien</h2>").appendTo(column)
+    $("<div id=\"criteria\"></div>").appendTo(column)
+    column = $("<div class=\"col-md-6\"></div>").appendTo(row)
+    $("<h2>Kriterien im direkten Vergleich</h2>").appendTo(column)
+    $("<div id=\"head-to-head-criteria\"></div>").appendTo(column)
     $("#criteria").arrayControl
     (
         {
@@ -22,7 +27,6 @@ var loadSettings = function ()
             elementNames: criteriumNames,
         }
     )
-    return false
 }
 
 var updateTableControl = function (table)
@@ -36,7 +40,7 @@ var updateTableControl = function (table)
     $("<th>G</th>").appendTo(tr)
     $("<th>U</th>").appendTo(tr)
     $("<th>V</th>").appendTo(tr)
-    $("<th>Tore</th>").appendTo(tr)
+    $("<th colspan=\"3\">Tore</th>").appendTo(tr)
     $("<th>TD</th>").appendTo(tr)
     $("<th>P</th>").appendTo(tr)
     var tbody = $("<tbody></tbody>").appendTo("#table")
@@ -57,7 +61,9 @@ var updateTableControl = function (table)
         $("<td>" + team.won + "</td>").appendTo(tr)
         $("<td>" + team.drawn + "</td>").appendTo(tr)
         $("<td>" + team.lost + "</td>").appendTo(tr)
-        $("<td>" + team.goalsFor + ":" + team.goalsAgainst + "</td>").appendTo(tr)
+        $("<td>" + team.goalsFor + "</td>").appendTo(tr)
+        $("<td>:</td>").appendTo(tr)
+        $("<td>" + team.goalsAgainst + "</td>").appendTo(tr)
         if (team.goalDifference > 0)
         {
             $("<td class=\"align-right\">+" + team.goalDifference + "</td>").appendTo(tr)

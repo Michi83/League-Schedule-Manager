@@ -1,7 +1,9 @@
 var loadMatchday = function (matchday)
 {
     $("#content").empty()
-    var h1 = $("<h1>" + (matchday + 1) + ". Spieltag </h1>").appendTo("#content")
+    var row = $("<div class=\"\"></div>").appendTo("#content")
+    var column = $("<div class=\"col-md-12\"></div>").appendTo(row)
+    var h1 = $("<h1>" + (matchday + 1) + ". Spieltag </h1>").appendTo(column)
     if (matchday !== 0)
     {
         var moveUpButton = $("<input type=\"button\" value=\"⇦\" />").appendTo(h1)
@@ -47,7 +49,7 @@ var loadMatchday = function (matchday)
         teamFrequencies[homeTeam]++
         teamFrequencies[awayTeam]++
     }
-    var table = $("<table class=\"form-inline table table-striped\"></table>").appendTo("#content")
+    var table = $("<table class=\"form-inline table table-striped\"></table>").appendTo(column)
     for (var i = 0; i < matches[matchday].length; i++)
     {
         var match = matches[matchday][i]
@@ -133,8 +135,8 @@ var loadMatchday = function (matchday)
         }
         createButtons(matchday, i)
     }
-    $("<h2>Tabelle</h2>").appendTo("#content")
-    $("<table class=\"table table-striped\" id=\"table\"></table>").appendTo("#content")
+    $("<h2>Tabelle</h2>").appendTo(column)
+    $("<table class=\"table table-striped\" id=\"table\"></table>").appendTo(column)
     calculateTable(matchday)
     return false
 }

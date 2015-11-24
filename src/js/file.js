@@ -7,10 +7,12 @@ $(document).ready
             function ()
             {
                 $("#content").empty()
-                $("<h2>Neuer Spielplan</h2>").appendTo("#content")
-                $("<label for=\"rounds\">Anzahl Runden: </label>").appendTo("#content")
+                var row = $("<div class=\"row\"></div>").appendTo("#content")
+                var column = $("<div class=\"col-md-12\"></div>").appendTo(row)
+                $("<h1>Neuer Spielplan</h1>").appendTo(column)
+                $("<label for=\"rounds\">Anzahl Runden: </label>").appendTo(column)
                 rounds = 2
-                var roundsInput = $("<input id=\"rounds\" min=\"1\" type=\"number\" value=\"2\" />").appendTo("#content")
+                var roundsInput = $("<input id=\"rounds\" min=\"1\" type=\"number\" value=\"2\" />").appendTo(column)
                 roundsInput.change
                 (
                     function (event)
@@ -19,14 +21,13 @@ $(document).ready
                     }
                 )
                 teams = []
-                $("<h3>Mannschaften</h3>").appendTo("#content")
-                var teamsInput = $("<div id=\"teams\"></div>").appendTo("#content")
+                $("<h2>Mannschaften</h2>").appendTo(column)
+                var teamsInput = $("<div id=\"teams\"></div>").appendTo(column)
                 teamsInput.arrayControl({array: teams})
                 criteria = []
                 headToHeadCriteria = []
-                var generateButton = $("<input type=\"button\" value=\"Spielplan erzeugen\" />").appendTo("#content")
+                var generateButton = $("<input type=\"button\" value=\"Spielplan erzeugen\" />").appendTo(column)
                 generateButton.click(generateMatches)
-                return false
             }
         )
 
