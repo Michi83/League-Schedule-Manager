@@ -117,7 +117,6 @@ var generateMatches = function ()
  */
 var compareTeams = function (team1, team2, criteria, statistics)
 {
-    console.log(statistics)
     for (var i = 0; i < criteria.length; i++)
     {
         var criterium = criteria[i]
@@ -448,7 +447,7 @@ var calculateHeadToHeadTable = function (table, matchday)
         }
         if (j - i > 1 && !(i === 0 && j === table.length))
         {
-            calculateHeadToHeadTable(table.slice(i, j), maxMatchday)
+            calculateHeadToHeadTable(table.slice(i, j), matchday)
         }
     }
 }
