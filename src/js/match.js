@@ -155,11 +155,16 @@ var updateMatchdayControl = function ()
             loadSettings()
         }
     )
+    var firstMatchdayButton
     for (var i = 0; i < matches.length; i++)
     {
         var initMatchdayButton = function (i)
         {
             var button = $("<button class=\"btn btn-default matchday-button\">" + (i + 1) + "</button>").appendTo(buttonGroup)
+            if (i === 0)
+            {
+                firstMatchdayButton = button
+            }
             button.click
             (
                 function ()
@@ -172,5 +177,5 @@ var updateMatchdayControl = function ()
         }
         initMatchdayButton(i)
     }
-    settings.click()
+    firstMatchdayButton.click()
 }

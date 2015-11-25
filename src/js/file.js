@@ -47,6 +47,7 @@ $(document).ready
         (
             function ()
             {
+                $("#matchdays").empty()
                 $("#content").empty()
                 $("<h2>Spielplan öffnen</h2>").appendTo("#content")
                 $("<input id=\"file\" type=\"file\" />").appendTo("#content")
