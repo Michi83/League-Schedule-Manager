@@ -303,7 +303,7 @@ var calculateTable = function (matchday)
                     }
                     if (k - j > 1)
                     {
-                        calculateHeadToHeadTable(table.slice(j, k), matchday)
+                        calculateHeadToHeadTable(table.slice(j, k), i)
                     }
                 }
                 // Wir sortieren noch mal nach Platz.
