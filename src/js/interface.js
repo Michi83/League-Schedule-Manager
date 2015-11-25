@@ -39,6 +39,7 @@ var updateTableControl = function (table)
     $("<th colspan=\"3\">Tore</th>").appendTo(tr)
     $("<th>TD</th>").appendTo(tr)
     $("<th>P</th>").appendTo(tr)
+    $("<th></th>").appendTo(tr)
     var tbody = $("<tbody></tbody>").appendTo("#table")
     for (var i = 0; i < table.length; i++)
     {
@@ -71,11 +72,15 @@ var updateTableControl = function (table)
         $("<td>" + team.points + "</td>").appendTo(tr)
         if (team.change > 0)
         {
-            $("<td>⬇" + team.change + "</td>").appendTo(tr)
+            $("<td>&darr;" + team.change + "</td>").appendTo(tr)
+        }
+        else if (team.change === 0)
+        {
+            $("<td></td>").appendTo(tr)
         }
         else if (team.change < 0)
         {
-            $("<td>⬆" + -team.change + "</td>").appendTo(tr)
+            $("<td>&uarr;" + -team.change + "</td>").appendTo(tr)
         }
     }
 }
