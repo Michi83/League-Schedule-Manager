@@ -117,6 +117,7 @@ var generateMatches = function ()
  */
 var compareTeams = function (team1, team2, criteria, statistics)
 {
+    console.log(statistics)
     for (var i = 0; i < criteria.length; i++)
     {
         var criterium = criteria[i]
@@ -323,7 +324,7 @@ var calculateTable = function (matchday)
                     }
                     if (k - j > 1)
                     {
-                        calculateTableAfter(table.slice(j, k), matchday)
+                        calculateTableAfter(table.slice(j, k), statistics)
                     }
                 }
                 // Und ein letztes Mal sortieren.
