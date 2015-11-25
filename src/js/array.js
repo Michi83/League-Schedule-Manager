@@ -78,10 +78,9 @@ $.fn.arrayControl = function (options)
             createButtons(i)
         }
         var formInline = $("<div class=\"form-inline\"></div>").appendTo(container)
-        var formGroup = $("<div class=\"form-group\"></div>").appendTo(formInline)
         if (elements === undefined)
         {
-            var input = $("<input class=\"form-control\" />").appendTo(formGroup)
+            var input = $("<input class=\"form-control\" />").appendTo(formInline)
             $(document.createTextNode(" ")).appendTo(formInline)
             var addButton = $("<button class=\"btn btn-success\">Hinzufügen</button>").appendTo(formInline)
             addButton.click
@@ -102,7 +101,7 @@ $.fn.arrayControl = function (options)
         {
             if (array.length < elements.length)
             {
-                var select = $("<select class=\"form-control\"></select>").appendTo(formGroup)
+                var select = $("<select class=\"form-control\"></select>").appendTo(formInline)
                 for (var i = 0; i < elements.length; i++)
                 {
                     var element = elements[i]

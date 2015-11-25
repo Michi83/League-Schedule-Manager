@@ -49,9 +49,16 @@ $(document).ready
             {
                 $("#matchdays").empty()
                 $("#content").empty()
-                $("<h2>Spielplan öffnen</h2>").appendTo("#content")
-                $("<input id=\"file\" type=\"file\" />").appendTo("#content")
-                var openButton = $("<input type=\"button\" value=\"Spielplan öffnen\" />").appendTo("#content")
+                var row, column
+                row = $("<div class=\"row\"></div>").appendTo("#content")
+                column = $("<div class=\"col-md-12\"></div>").appendTo(row)
+                $("<h1>Spielplan öffnen</h1>").appendTo(column)
+                row = $("<div class=\"row\"></div>").appendTo("#content")
+                column = $("<div class=\"col-md-12\"></div>").appendTo(row)
+                var formInline = $("<div class=\"form-inline\"></div>").appendTo(column)
+                $("<input class=\"form-control\" id=\"file\" type=\"file\" />").appendTo(formInline)
+                $(document.createTextNode(" ")).appendTo(formInline)
+                var openButton = $("<button class=\"btn btn-primary\">Spielplan öffnen</button>").appendTo(formInline)
                 openButton.click
                 (
                     function ()
