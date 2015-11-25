@@ -1,11 +1,7 @@
 var loadSettings = function ()
 {
-    $("#content").empty()
     var row = $("<div class=\"row\"></div>").appendTo("#content")
-    var column = $("<div class=\"col-md-12\"></div>").appendTo(row)
-    $("<h1>Einstellungen</h1>").appendTo(column)
-    row = $("<div class=\"row\"></div>").appendTo("#content")
-    column = $("<div class=\"col-md-6\"></div>").appendTo(row)
+    var column = $("<div class=\"col-md-6\"></div>").appendTo(row)
     $("<h2>Tabellenkriterien</h2>").appendTo(column)
     $("<div id=\"criteria\"></div>").appendTo(column)
     column = $("<div class=\"col-md-6\"></div>").appendTo(row)

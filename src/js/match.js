@@ -152,6 +152,10 @@ var updateMatchdayControl = function ()
         {
             $(".matchday-button").removeClass("active")
             settings.addClass("active")
+            $("#content").empty()
+            var row = $("<div class=\"row\"></div>").appendTo("#content")
+            var column = $("<div class=\"col-md-12\"></div>").appendTo(row)
+            $("<h1>Einstellungen</h1>").appendTo(column)
             loadSettings()
         }
     )

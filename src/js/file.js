@@ -35,6 +35,7 @@ $(document).ready
                 teamsInput.arrayControl({array: teams})
                 criteria = []
                 headToHeadCriteria = []
+                loadSettings()
                 row = $("<div class=\"row\"></div>").appendTo("#content")
                 column = $("<div class=\"col-md-12\"></div>").appendTo(row)
                 var generateButton = $("<button class=\"btn btn-primary\">Spielplan generieren</button>").appendTo(column)
