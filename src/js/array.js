@@ -77,7 +77,8 @@ $.fn.arrayControl = function (options)
             }
             createButtons(i)
         }
-        var formInline = $("<div class=\"form-inline\"></div>").appendTo(container)
+        var formGroup = $("<div class=\"form-group\"></div>").appendTo(container)
+        var formInline = $("<div class=\"form-inline\"></div>").appendTo(formGroup)
         if (elements === undefined)
         {
             var input = $("<input class=\"form-control\" />").appendTo(formInline)
