@@ -33,40 +33,40 @@ var loadMatchday = function (matchday)
             }
         )
     }
-    var teamFrequencies = {}
+    var teamCount = {}
     for (var i = 0; i < matches[matchday].length; i++)
     {
         var match = matches[matchday][i]
         var homeTeam = match.homeTeam
         var awayTeam = match.awayTeam
-        if (teamFrequencies[homeTeam] === undefined)
+        if (teamCount[homeTeam] === undefined)
         {
-            teamFrequencies[homeTeam] = 0
+            teamCount[homeTeam] = 0
         }
-        if (teamFrequencies[awayTeam] === undefined)
+        if (teamCount[awayTeam] === undefined)
         {
-            teamFrequencies[awayTeam] = 0
+            teamCount[awayTeam] = 0
         }
-        teamFrequencies[homeTeam]++
-        teamFrequencies[awayTeam]++
+        teamCount[homeTeam]++
+        teamCount[awayTeam]++
     }
     var table = $("<table class=\"form-inline table table-striped\"></table>").appendTo(column)
     for (var i = 0; i < matches[matchday].length; i++)
     {
         var match = matches[matchday][i]
         var tr = $("<tr></tr>").appendTo(table)
-        if (teamFrequencies[match.homeTeam] > 1)
+        if (teamCount[match.homeTeam] > 1)
         {
-            $("<td class=\"red\">" + match.homeTeam + "</td>").appendTo(tr)
+            $("<td><span class=\"label label-danger\">" + match.homeTeam + "</span></td>").appendTo(tr)
         }
         else
         {
             $("<td>" + match.homeTeam + "</td>").appendTo(tr)
         }
         $("<td>-</td>").appendTo(tr)
-        if (teamFrequencies[match.awayTeam] > 1)
+        if (teamCount[match.awayTeam] > 1)
         {
-            $("<td class=\"red\">" + match.awayTeam + "</td>").appendTo(tr)
+            $("<td><span class=\"label label-danger\">" + match.awayTeam + "</span></td>").appendTo(tr)
         }
         else
         {
