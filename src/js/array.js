@@ -77,13 +77,14 @@ $.fn.arrayControl = function (options)
             }
             createButtons(i)
         }
-        var formGroup = $("<div class=\"form-group\"></div>").appendTo(container)
-        var formInline = $("<div class=\"form-inline\"></div>").appendTo(formGroup)
+        var tr = $("<tr></tr>").appendTo(table)
         if (elements === undefined)
         {
-            var input = $("<input class=\"form-control\" />").appendTo(formInline)
-            $(document.createTextNode(" ")).appendTo(formInline)
-            var addButton = $("<button class=\"btn btn-success\">Hinzufügen</button>").appendTo(formInline)
+            var td
+            td = $("<td colspan=\"3\"></td>").appendTo(tr)
+            var input = $("<input class=\"form-control\" />").appendTo(td)
+            td = $("<td></td>").appendTo(tr)
+            var addButton = $("<button class=\"btn btn-success\">Hinzufügen</button>").appendTo(td)
             addButton.click
             (
                 function ()
@@ -102,7 +103,9 @@ $.fn.arrayControl = function (options)
         {
             if (array.length < elements.length)
             {
-                var select = $("<select class=\"form-control\"></select>").appendTo(formInline)
+                var td
+                td = $("<td colspan=\"3\"></td>").appendTo(tr)
+                var select = $("<select class=\"form-control\"></select>").appendTo(td)
                 for (var i = 0; i < elements.length; i++)
                 {
                     var element = elements[i]
@@ -111,8 +114,8 @@ $.fn.arrayControl = function (options)
                         $("<option value=\"" + element + "\">" + elementNames[element] + "</option>").appendTo(select)
                     }
                 }
-                $(document.createTextNode(" ")).appendTo(formInline)
-                var addButton = $("<button class=\"btn btn-success\">Hinzufügen</button>").appendTo(formInline)
+                td = $("<td></td>").appendTo(tr)
+                var addButton = $("<button class=\"btn btn-success\">Hinzufügen</button>").appendTo(td)
                 addButton.click
                 (
                     function ()

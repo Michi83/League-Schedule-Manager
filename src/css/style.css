@@ -3,11 +3,6 @@
     width: 60px;
 }
 
-.table-layout-fixed
-{
-    table-layout: fixed;
-}
-
 .text-align-center
 {
     text-align: center;
@@ -16,4 +11,9 @@
 .text-align-right
 {
     text-align: right;
+}
+
+table
+{
+    table-layout: fixed;
 }
