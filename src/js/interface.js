@@ -36,7 +36,7 @@ var updateTableControl = function (table)
     $("<th>G</th>").appendTo(tr)
     $("<th>U</th>").appendTo(tr)
     $("<th>V</th>").appendTo(tr)
-    $("<th colspan=\"3\">Tore</th>").appendTo(tr)
+    $("<th>Tore</th>").appendTo(tr)
     $("<th>TD</th>").appendTo(tr)
     $("<th>P</th>").appendTo(tr)
     $("<th></th>").appendTo(tr)
@@ -58,12 +58,10 @@ var updateTableControl = function (table)
         $("<td>" + team.won + "</td>").appendTo(tr)
         $("<td>" + team.drawn + "</td>").appendTo(tr)
         $("<td>" + team.lost + "</td>").appendTo(tr)
-        $("<td>" + team.goalsFor + "</td>").appendTo(tr)
-        $("<td>:</td>").appendTo(tr)
-        $("<td>" + team.goalsAgainst + "</td>").appendTo(tr)
+        $("<td>" + team.goalsFor + "-" + team.goalsAgainst + "</td>").appendTo(tr)
         if (team.goalDifference > 0)
         {
-            $("<td class=\"align-right\">+" + team.goalDifference + "</td>").appendTo(tr)
+            $("<td>+" + team.goalDifference + "</td>").appendTo(tr)
         }
         else
         {
