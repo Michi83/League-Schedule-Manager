@@ -15,8 +15,7 @@ $(document).ready
                 row = $("<div class=\"row\"></div>").appendTo("#content")
                 column = $("<div class=\"col-md-6\"></div>").appendTo(row)
                 $("<h2>Einstellungen</h2>").appendTo(column)
-                var formInline = $("<div class=\"form-inline\"></div>").appendTo(column)
-                var formGroup = $("<div class=\"form-group\"></div>").appendTo(formInline)
+                var formGroup = $("<div class=\"form-group\"></div>").appendTo(column)
                 $("<label for=\"rounds\">Anzahl Runden</label>").appendTo(formGroup)
                 $(document.createTextNode(" ")).appendTo(formGroup)
                 rounds = 2

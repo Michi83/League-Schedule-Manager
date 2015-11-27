@@ -74,13 +74,13 @@ var updateTableControl = function (table)
         {
             $("<td>&darr;" + team.change + "</td>").appendTo(tr)
         }
-        else if (team.change === 0)
-        {
-            $("<td></td>").appendTo(tr)
-        }
         else if (team.change < 0)
         {
             $("<td>&uarr;" + -team.change + "</td>").appendTo(tr)
+        }
+        else
+        {
+            $("<td></td>").appendTo(tr)
         }
     }
 }
