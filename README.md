@@ -73,5 +73,5 @@ Beim direkten Vergleich wird eine Nebentabelle aufgestellt, in der nur Spiele z�
 ## Technologie
 League Schedule Manager wurde vollständig in clientseitigem JavaScript geschrieben. Man kann es auf einem Webserver hosten oder einfach durch Doppelklick auf index.html starten.
 
-### Browser compatibility
+### Browserkompatibilität
 Sollte in den neuesten Versionen von Chrome und Firefox funktionieren. Bitte beachte, dass das ein Hobby-Projekt ist und ich keine wertvolle Freizeit für hässliche Browser-Hacks verschwenden werde.
