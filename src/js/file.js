@@ -109,7 +109,7 @@ $(document).ready
             }
         )
 
-        $("<li><a href=\"https://github.com/Michi83/Spielplan-Manager/blob/master/README.md\" target=\"_blank\">" + language["Help"] + "</a></li>").appendTo(navbar)
+        $("<li><a href=\"https://github.com/Michi83/League-Schedule-Manager/blob/master/README.md\" target=\"_blank\">" + language["Help"] + "</a></li>").appendTo(navbar)
         $("#intro").html(language["Generates league schedules and tables for football (soccer) tournaments."])
         newLink.click()
     }

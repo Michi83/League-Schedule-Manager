@@ -1,7 +1,7 @@
 # League Schedule Manager
 Generates league schedules and tables for football (soccer) tournaments.
 
-Demo: http://michi83.github.io/Spielplan-Manager/
+Demo: http://michi83.github.io/League-Schedule-Manager/
 
 ## Generate league schedules
 League Schedules for round-robin tournaments with any number of teams and rounds can be generated. There may be an odd number of teams. In this case, one team has a bye on each matchday. Teams will play at home and on the road alternately most of the time but not always.
@@ -34,7 +34,7 @@ In head-to-head comparisons a subtable is used, considering only matches between
 # Spielplan-Manager
 Erstellt Spielpläne und Tabellen für Fußballturniere.
 
-Demo: http://michi83.github.io/Spielplan-Manager/
+Demo: http://michi83.github.io/League-Schedule-Manager/
 
 ## Spielplan generieren
 Es können Spielpläne für Jeder-gegen-jeden-Turniere mit beliebig vielen Mannschaften und Runden generiert werden. Die Anzahl der Mannschaften kann ungerade sein, in diesem Fall hat an jedem Spieltag eine Mannschaft spielfrei. Meistens, aber nicht immer, werden Mannschaften abwechselnd zu Hause und auswärts spielen.
