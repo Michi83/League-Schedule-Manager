@@ -1,12 +1,9 @@
 /*
- * Ein selbstgebasteltes JQuery-Plugin, mit dem der Benutzer den Inhalt eines
- * Arrays verwalten kann. Man kann Elemente aus einer Drop-Down-Liste
- * hinzufügen, löschen und ihre Reihenfolge ändern. Zu den Optionen gehören:
- * - options.array: Das Array, das verwaltet wird.
- * - options.elements: Mögliche Elemente für das Array. Fehlt diese Option, dann
- *   kann der Benutzer in einem Freitextfeld Elemente eingeben.
- * - options.elementNames: Die Namen der Elemente, die dem Benutzer in der
- *   Drop-Down-Liste angezeigt werden.
+ * A jQuery plugin that lets users manage the contents of an array. Elements can
+ * be added from a drop-down list, deleted and moved. Options are:
+ * - options.array: The array to be managed.
+ * - options.elements: An array of admissible elements for the array. Without it
+ *   users can add arbitrary elements with a text field.
  */
 $.fn.arrayControl = function (options)
 {
@@ -89,7 +86,7 @@ $.fn.arrayControl = function (options)
                 function ()
                 {
                     var element = input.val()
-                    // Leere und doppelte Elemente sind nicht erlaubt.
+                    // Empty and duplicate elements are not allowed.
                     if (element !== "" && array.indexOf(element) === -1)
                     {
                         array.push(element)

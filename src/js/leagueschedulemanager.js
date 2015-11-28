@@ -1,47 +1,41 @@
 /*
- * Um einen Spielplan zu erstellen, geht man so vor:
- * - Den ersten Spieltag teilt man beliebig ein.
- * - Eine Mannschaft im ersten oder letzten Spiel bleibt "fest" und befindet
- *   sich an allen Spieltagen an derselben Stelle.
- * - Alle anderen Mannschaften rotieren jeden Spieltag um eine Stelle weiter (im
- *   oder gegen den Uhrzeigersinn).
+ * In order to generate a schedule, you can do the following:
+ * - In the first matchday teams are paired off arbitrarily.
+ * - One team in the first or last match is "fixed" and will stay put.
+ * - The other teams will rotate (clockwise or counter-clockwise) one position
+ *   per matchday.
  *
- * Beispiel mit sechs Mannschaften (A bleibt fest, die anderen rotieren gegen
- * den Uhrzeigersinn):
+ * Example with six teams (A is fixed, the others rotate counter-clockwise):
  * A-F  A-E  A-D  A-C  A-B
  * B-E  F-D  E-C  D-B  C-F
  * C-D  B-C  F-B  E-F  D-E
  *
- * Warum das funktioniert, kann man an folgender Überlegung erkennen:
- * - Im letzten Spiel eines Spieltages spielt man gegen die Mannschaften die
- *   eine Stelle entfernt sind.
- * - Im vorletzten Spiel eines Spieltages spielt man gegen die Mannschaften die
- *   drei Stellen entfernt sind.
- * - Im drittletzten Spiel eines Spieltages spielt man gegen die Mannschaften
- *   die fünf Stellen entfernt sind.
+ * To understand why this works, consider the following:
+ * - In the last match of a matchday you play against teams one position ahead
+ *   or behind.
+ * - In the second to last match of a matchday you play against teams three
+ *   positions ahead or behind.
+ * - In the third to last match of a matchday you play against teams five
+ *   positions ahead or behind.
  * - ...
- * - Im zweiten Spiel eines Spieltages spielt man gegen die Mannschaften die
- *   zwei Stellen entfernt sind.
- * - Im dritten Spiel eines Spieltages spielt man gegen die Mannschaften die
- *   vier Stellen entfernt sind.
- * - Im vierten Spiel eines Spieltages spielt man gegen die Mannschaften die
- *   sechs Stellen entfernt sind.
+ * - In the second match of a matchday you play against teams two positions
+ *   ahead or behind.
+ * - In the third match of a matchday you play against teams four positions
+ *   ahead or behind.
+ * - In the fourth match of a matchday you play against teams six positions
+ *   ahead or behind.
  * - ...
- * Jede rotierende Mannschaft spielt damit gegen alle anderen rotierenden
- * Mannschaften.
+ * So each rotating team will play against each rotating team.
  *
- * Wenn die Anzahl der Mannschaften ungerade ist, dann fügen wir noch eine
- * "Geistermannschaft" hinzu. Wer gegen die Geistermannschaft spielt, hat
- * spielfrei.
+ * If there is an odd number of team, we'll add a "phantom team". The team
+ * playing against the phantom team has a bye.
  *
- * Am besten wäre es, wenn jede Mannschaft immer abwechselnd zu hause und
- * auswärts spielen würde. Leider ist das gar nicht möglich, denn wenn zwei
- * Mannschaften beide am ersten Spieltag zuhause spielen, dann müssen sie am
- * zweiten auswärts spielen, am dritten Spieltag zu hause, usw. Wer spielt dann
- * zu hause, wenn die beiden Mannschaften gegeneinander spielen?
- * Wir können aber an jedem zweiten Spieltag Heim- und Auswärtsmannschaft
- * tauschen, dann spielen alle Mannschaften zumindest meistens abwechselnd zu
- * hause und auswärts.
+ * We would like teams to play at home and on the road alternately.
+ * Unfortunately this is impossible: If two teams play at home on the first
+ * matchday, they will play on the road on the second, at home on the third and
+ * so on. Who will play at home when the play against each other?
+ * However we can swap home and away teams every other matchday, so that teams
+ * play at home and on the road alternately most of the time.
  */
 var generateMatches = function ()
 {
@@ -78,30 +72,27 @@ var generateMatches = function ()
 }
 
 /*
- * Tabellen erstellen wäre eigentlich ganz einfach. Jeder Programmierer kennt
- * Sortieralgorithmen wie Quicksort und in den Standardbibliotheken der meisten
- * Sprachen ist eine Sortierfunktion enthalten. Aber diese Algorithmen
- * funktionieren nur, wenn man die Elemente transitiv vergleichen kann, d.h.
- * wenn A > B und B > C, dann A > C. Leider ist das beim direkten Vergleich
- * nicht immer der Fall. Wenn A im direkten Vergleich besser ist als B und B
- * besser als C, dann ist A nicht unbedingt besser als C.
+ * Calculating tables should be really easy. Every programmer knows sorting
+ * algorithms like quicksort and the standard libraries of most programming
+ * languages have them built in. Unfortunately these algorithms only work when
+ * there is a transitive comparison between elements, i.e. if A > B and B > C
+ * then A > C. This is not always the case with head-to-head comparisons. If A
+ * is better that B in a head-to-head comparison and B better than C then A is
+ * not necessarily better than C.
  *
- * Also gehen wir so vor:
- * - Die Kriterien zerfallen in drei Gruppen, die Kriterien vor dem direkten
- *   Vergleich, im direkten Vergleich und nach dem direkten Vergleich.
- * - Wir setzen alle Mannschaften auf Platz 1 und vergleichen sie paarweise
- *   miteinander nach den Kriterien vor dem direkten Vergleich. Dabei gehen wir
- *   die Kriterien der Reihe nach durch, bis wir eins finden, in dem sich die
- *   Mannschaften unterscheiden. Die schlechtere Mannschaft rutscht einen Platz
- *   ab. Anders gesagt: Der Platz einer Mannschaft ist die Anzahl der besseren
- *   Mannschaften + 1.
- * - Jetzt suchen wir nach Gruppen gleichrangiger Mannschaften und stellen für
- *   sie eine Nebentabelle nach den Kriterien des direkten Vergleichs auf. Wenn
- *   sich der Gleichstand dadurch nur teilweise auflösen lässt, dann wenden wir
- *   den direkten Vergleich erneut an. Das wiederholen wir bis alle Gleichstände
- *   aufgelöst sind oder sich nicht mehr weiter auflösen lassen.
- * - Auf die verbliebenen Gleichstände wenden wir noch die Kriterien nach dem
- *   direkten Vergleich an.
+ * So we use the following method:
+ * - The criteria are broken down into three groups: Criteria before
+ *   head-to-head comparisons, head-to-head criteria and criteria after
+ *   head-to-head comparisons.
+ * - Each team is put in position one. Then we do a pairwise comparison of all
+ *   teams, where we apply the "before criteria" in order until we find one
+ *   where the teams differ. The inferior team drops one position. In other
+ *   words: A team's position is the number of superior teams + 1.
+ * - Now we search for groups of tied teams and make a subtable for them ordered
+ *   by the head-to-head criteria. If this only partially resolved the ties we
+ *   repeat this for the remaining ties until either all ties are resolved or
+ *   cannot be resolved any further.
+ * - Finally we apply the "after criteria" to any remaining ties.
  */
 var compareTeams = function (team1, team2, criteria, statistics)
 {
@@ -194,7 +185,7 @@ var calculateTable = function (matchday)
     var currentTable, previousTable
     for (var i = 0; i <= matchday; i++)
     {
-        // Erst mal Statistiken sammeln.
+        // Collect statistics.
         for (var j = 0; j < matches[i].length; j++)
         {
             var match = matches[i][j]
@@ -226,11 +217,13 @@ var calculateTable = function (matchday)
                 statistics[awayTeam].awayGoals += awayGoals
             }
         }
-        // Wir erstellen Tabellen für den aktuellen und den vorherigen Spieltag.
-        // So können wir ausrechnen, wie sich die Plätze der Mannschaften verändert haben.
+        /*
+         * We make tables for the current and the previous Matchday, so that we
+         * can calculate changes in position.
+         */
         if (i === matchday || i === matchday - 1)
         {
-            // Jetzt setzen wir erst mal alle Mannschaften auf Platz 1.
+            // All teams are put in position one.
             var table = []
             for (var j = 0; j < teams.length; j++)
             {
@@ -251,10 +244,7 @@ var calculateTable = function (matchday)
                     }
                 )
             }
-            // Jetzt können wir die Mannschaften paarweise vergleichen nach den
-            // Kriterien vor dem direkten Vergleich. Die schlechtere Mannschaft
-            // rutscht dabei einen Platz ab. Anders gesagt: Der Platz einer
-            // Mannschaft ist die Anzahl der besseren Mannschaften + 1.
+            // Now we do pairwise comparisons applying the "before criteria".
             for (var j = 0; j < table.length; j++)
             {
                 var team1 = table[j]
@@ -272,7 +262,7 @@ var calculateTable = function (matchday)
                     }
                 }
             }
-            // Jetzt sortieren wir die Mannschaften nach Platz.
+            // Sort by position.
             table.sort
             (
                 function (team1, team2)
@@ -282,8 +272,7 @@ var calculateTable = function (matchday)
             )
             if (headToHeadIndex !== -1)
             {
-                // Wir suchen nach gleichrangigen Mannschaften und wenden den
-                // direkten Vergleich an.
+                // Search for tied teams and apply the head-to-head comparison.
                 for (var j = 0, k; j < table.length; j = k)
                 {
                     for (k = j + 1; k < table.length && table[j].position === table[k].position; k++)
@@ -294,7 +283,7 @@ var calculateTable = function (matchday)
                         calculateHeadToHeadTable(table.slice(j, k), i)
                     }
                 }
-                // Wir sortieren noch mal nach Platz.
+                // Sort again by position.
                 table.sort
                 (
                     function (team1, team2)
@@ -302,8 +291,7 @@ var calculateTable = function (matchday)
                         return team1.position - team2.position
                     }
                 )
-                // Und wir suchen noch mal nach gleichrangigen Mannschaften und
-                // wenden die Kriterien nach dem direkten Vergleich an.
+                // Search for teams still tied and apply "after criteria".
                 for (var j = 0, k; j < table.length; j = k)
                 {
                     for (k = j + 1; k < table.length && table[j].position === table[k].position; k++)
@@ -314,7 +302,7 @@ var calculateTable = function (matchday)
                         calculateTableAfter(table.slice(j, k), statistics)
                     }
                 }
-                // Und ein letztes Mal sortieren.
+                // Sort one more time.
                 table.sort
                 (
                     function (team1, team2)
@@ -333,7 +321,7 @@ var calculateTable = function (matchday)
             }
         }
     }
-    // Platzveränderungen
+    // Changes in position.
     if (matchday > 0)
     {
         var previouspositions = {}
@@ -358,7 +346,7 @@ var calculateHeadToHeadTable = function (table, matchday)
     {
         teams.push(table[i].team)
     }
-    // Statistiken für Nebentabelle sammeln
+    // Collect statistics for subtable.
     var statistics = {}
     for (var i = 0; i < teams.length; i++)
     {
@@ -423,17 +411,15 @@ var calculateHeadToHeadTable = function (table, matchday)
             return team1.position - team2.position
         }
     )
-    // Jetzt suchen wir noch mal nach gleichrangigen Mannschaften und wenden den
-    // direkten Vergleich rekursiv an. Aber um uns nicht in eine endlose
-    // Rekursion zu verzetteln, machen wir das nicht, wenn der Gleichstand alle
-    // Mannschaften betrifft.
+    // Repeat head-to-head comparison for teams still tied.
+    // To avoid an infinite recursion we only do this if not all teams are still tied.
     var i, j
     for (i = 0, j; i < table.length; i = j)
     {
         for (j = i + 1; j < table.length && table[i].position === table[j].position; j++)
         {
         }
-        if (j - i > 1 && !(i === 0 && j === table.length))
+        if (j - i > 1 && j - i < table.length)
         {
             calculateHeadToHeadTable(table.slice(i, j), matchday)
         }
