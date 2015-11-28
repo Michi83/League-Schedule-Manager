@@ -21,11 +21,11 @@ $.fn.arrayControl = function (options)
             var tr = $("<tr></tr>").appendTo(table)
             if (elements === undefined)
             {
-                $("<td>" + element + "</td>").appendTo(tr)
+                $("<td colspan=\"2\">" + element + "</td>").appendTo(tr)
             }
             else
             {
-                $("<td>" + language[element] + "</td>").appendTo(tr)
+                $("<td colspan=\"2\">" + language[element] + "</td>").appendTo(tr)
             }
             var createButtons = function (i)
             {
@@ -77,7 +77,7 @@ $.fn.arrayControl = function (options)
         if (elements === undefined)
         {
             var td
-            td = $("<td colspan=\"3\"></td>").appendTo(tr)
+            td = $("<td colspan=\"4\"></td>").appendTo(tr)
             var input = $("<input class=\"form-control\" />").appendTo(td)
             td = $("<td></td>").appendTo(tr)
             var addButton = $("<button class=\"btn btn-success\">" + language["Add"] + "</button>").appendTo(td)
@@ -100,7 +100,7 @@ $.fn.arrayControl = function (options)
             if (array.length < elements.length)
             {
                 var td
-                td = $("<td colspan=\"3\"></td>").appendTo(tr)
+                td = $("<td colspan=\"4\"></td>").appendTo(tr)
                 var select = $("<select class=\"form-control\"></select>").appendTo(td)
                 for (var i = 0; i < elements.length; i++)
                 {
