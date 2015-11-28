@@ -1,18 +1,19 @@
+allCriteria = ["Points", "Goal difference", "Goals", "Away goals", "Goal average", "Matches won"]
+
 var loadSettings = function ()
 {
     var row = $("<div class=\"row\"></div>").appendTo("#content")
     var column = $("<div class=\"col-md-6\"></div>").appendTo(row)
-    $("<h2>Tabellenkriterien</h2>").appendTo(column)
+    $("<h2>" + language["Tiebreaker criteria"] + "</h2>").appendTo(column)
     $("<div id=\"criteria\"></div>").appendTo(column)
     column = $("<div class=\"col-md-6\"></div>").appendTo(row)
-    $("<h2>Kriterien im direkten Vergleich</h2>").appendTo(column)
+    $("<h2>" + language["Head-to-head criteria"] + "</h2>").appendTo(column)
     $("<div id=\"head-to-head-criteria\"></div>").appendTo(column)
     $("#criteria").arrayControl
     (
         {
             array: criteria,
-            elements: allCriteria.concat(["head-to-head"]),
-            elementNames: criteriumNames,
+            elements: allCriteria.concat(["Head-to-head comparison"]),
         }
     )
     $("#head-to-head-criteria").arrayControl
@@ -20,7 +21,6 @@ var loadSettings = function ()
         {
             array: headToHeadCriteria,
             elements: allCriteria,
-            elementNames: criteriumNames,
         }
     )
 }
@@ -30,15 +30,15 @@ var updateTableControl = function (table)
     $("#table").empty()
     var thead = $("<thead></thead>").appendTo("#table")
     var tr = $("<tr></tr>").appendTo(thead)
-    $("<th></th>").appendTo(tr)
-    $("<th colspan=\"2\"></th>").appendTo(tr)
-    $("<th>S</th>").appendTo(tr)
-    $("<th>G</th>").appendTo(tr)
-    $("<th>U</th>").appendTo(tr)
-    $("<th>V</th>").appendTo(tr)
-    $("<th>Tore</th>").appendTo(tr)
-    $("<th>TD</th>").appendTo(tr)
-    $("<th>P</th>").appendTo(tr)
+    $("<th>" + language["Pos"] + "</th>").appendTo(tr)
+    $("<th colspan=\"2\">" + language["Team"] + "</th>").appendTo(tr)
+    $("<th>" + language["Pld"] + "</th>").appendTo(tr)
+    $("<th>" + language["W"] + "</th>").appendTo(tr)
+    $("<th>" + language["D"] + "</th>").appendTo(tr)
+    $("<th>" + language["L"] + "</th>").appendTo(tr)
+    $("<th>" + language["Goals"] + "</th>").appendTo(tr)
+    $("<th>" + language["GD"] + "</th>").appendTo(tr)
+    $("<th>" + language["Pts"] + "</th>").appendTo(tr)
     $("<th></th>").appendTo(tr)
     var tbody = $("<tbody></tbody>").appendTo("#table")
     for (var i = 0; i < table.length; i++)
@@ -47,7 +47,7 @@ var updateTableControl = function (table)
         var tr = $("<tr></tr>").appendTo(tbody)
         if (i === 0 || team.position !== table[i - 1].position)
         {
-            $("<td>" + team.position + ".</td>").appendTo(tr)
+            $("<td>" + team.position + "</td>").appendTo(tr)
         }
         else
         {

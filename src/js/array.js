@@ -13,7 +13,6 @@ $.fn.arrayControl = function (options)
     var array = options.array
     var container = this
     var elements = options.elements
-    var elementNames = options.elementNames
 
     var updateArrayControl = function ()
     {
@@ -29,7 +28,7 @@ $.fn.arrayControl = function (options)
             }
             else
             {
-                $("<td>" + elementNames[element] + "</td>").appendTo(tr)
+                $("<td>" + language[element] + "</td>").appendTo(tr)
             }
             var createButtons = function (i)
             {
@@ -65,7 +64,7 @@ $.fn.arrayControl = function (options)
                     )
                 }
                 td = $("<td></td>").appendTo(tr)
-                var deleteButton = $("<button class=\"btn btn-danger\">Löschen</button>").appendTo(td)
+                var deleteButton = $("<button class=\"btn btn-danger\">" + language["Remove"] + "</button>").appendTo(td)
                 deleteButton.click
                 (
                     function ()
@@ -84,7 +83,7 @@ $.fn.arrayControl = function (options)
             td = $("<td colspan=\"3\"></td>").appendTo(tr)
             var input = $("<input class=\"form-control\" />").appendTo(td)
             td = $("<td></td>").appendTo(tr)
-            var addButton = $("<button class=\"btn btn-success\">Hinzufügen</button>").appendTo(td)
+            var addButton = $("<button class=\"btn btn-success\">" + language["Add"] + "</button>").appendTo(td)
             addButton.click
             (
                 function ()
@@ -111,11 +110,11 @@ $.fn.arrayControl = function (options)
                     var element = elements[i]
                     if (array.indexOf(element) === -1)
                     {
-                        $("<option value=\"" + element + "\">" + elementNames[element] + "</option>").appendTo(select)
+                        $("<option value=\"" + element + "\">" + language[element] + "</option>").appendTo(select)
                     }
                 }
                 td = $("<td></td>").appendTo(tr)
-                var addButton = $("<button class=\"btn btn-success\">Hinzufügen</button>").appendTo(td)
+                var addButton = $("<button class=\"btn btn-success\">" + language["Add"] + "</button>").appendTo(td)
                 addButton.click
                 (
                     function ()

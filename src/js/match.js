@@ -3,7 +3,7 @@ var loadMatchday = function (matchday)
     $("#content").empty()
     var row = $("<div class=\"row\"></div>").appendTo("#content")
     var column = $("<div class=\"col-md-12\"></div>").appendTo(row)
-    $("<h1>" + (matchday + 1) + ". Spieltag </h1>").appendTo(column)
+    $("<h1>" + language["Matchday"] + " " + (matchday + 1) + "</h1>").appendTo(column)
     var table = $("<table class=\"form-inline table table-layout-fixed table-striped\"></table>").appendTo(column)
     for (var i = 0; i < matches[matchday].length; i++)
     {
@@ -48,7 +48,7 @@ var loadMatchday = function (matchday)
         createInputs(matchday, i)
         $("<td>" + match.awayTeam + "</td>").appendTo(tr)
     }
-    $("<h2>Tabelle</h2>").appendTo(column)
+    $("<h2>" + language["Table"] + "</h2>").appendTo(column)
     $("<table class=\"table table-striped\" id=\"table\"></table>").appendTo(column)
     calculateTable(matchday)
 }
@@ -57,7 +57,7 @@ var updateMatchdayControl = function ()
 {
     $("#matchdays").empty()
     var buttonGroup = $("<div class=\"btn-group\"></div>").appendTo("#matchdays")
-    var settings = $("<button class=\"btn btn-default matchday-button\">Einstellungen</button>").appendTo(buttonGroup)
+    var settings = $("<button class=\"btn btn-default matchday-button\">" + language["Settings"] + "</button>").appendTo(buttonGroup)
     settings.click
     (
         function ()
@@ -67,7 +67,7 @@ var updateMatchdayControl = function ()
             $("#content").empty()
             var row = $("<div class=\"row\"></div>").appendTo("#content")
             var column = $("<div class=\"col-md-12\"></div>").appendTo(row)
-            $("<h1>Einstellungen</h1>").appendTo(column)
+            $("<h1>" + language["Settings"] + "</h1>").appendTo(column)
             loadSettings()
         }
     )

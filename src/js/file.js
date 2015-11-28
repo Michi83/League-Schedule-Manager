@@ -2,7 +2,11 @@ $(document).ready
 (
     function ()
     {
-        $("#new").click
+        var navbar = $(".navbar-nav")
+        var li
+        li = $("<li></li>").appendTo(navbar)
+        var newLink = $("<a href=\"#\">" + language["New"] + "</a>").appendTo(li)
+        newLink.click
         (
             function ()
             {
@@ -11,12 +15,12 @@ $(document).ready
                 var row, column
                 row = $("<div class=\"row\"></div>").appendTo("#content")
                 column = $("<div class=\"col-md-12\"></div>").appendTo(row)
-                $("<h1>Neuer Spielplan</h1>").appendTo(column)
+                $("<h1>" + language["New league schedule"] + "</h1>").appendTo(column)
                 row = $("<div class=\"row\"></div>").appendTo("#content")
                 column = $("<div class=\"col-md-6\"></div>").appendTo(row)
-                $("<h2>Einstellungen</h2>").appendTo(column)
+                $("<h2>" + language["Settings"] + "</h2>").appendTo(column)
                 var formGroup = $("<div class=\"form-group\"></div>").appendTo(column)
-                $("<label for=\"rounds\">Anzahl Runden</label>").appendTo(formGroup)
+                $("<label for=\"rounds\">" + language["Number of rounds"] + "</label>").appendTo(formGroup)
                 $(document.createTextNode(" ")).appendTo(formGroup)
                 rounds = 2
                 var roundsInput = $("<input class=\"form-control\" id=\"rounds\" min=\"1\" type=\"number\" value=\"2\" />").appendTo(formGroup)
@@ -29,7 +33,7 @@ $(document).ready
                 )
                 teams = []
                 column = $("<div class=\"col-md-6\"></div>").appendTo(row)
-                $("<h2>Mannschaften</h2>").appendTo(column)
+                $("<h2>" + language["Teams"] + "</h2>").appendTo(column)
                 var teamsInput = $("<div id=\"teams\"></div>").appendTo(column)
                 teamsInput.arrayControl({array: teams})
                 criteria = []
@@ -37,13 +41,15 @@ $(document).ready
                 loadSettings()
                 row = $("<div class=\"row\"></div>").appendTo("#content")
                 column = $("<div class=\"col-md-12\"></div>").appendTo(row)
-                var generateButton = $("<button class=\"btn btn-primary\">Spielplan generieren</button>").appendTo(column)
+                var generateButton = $("<button class=\"btn btn-primary\">" + language["Generate league schedule"] + "</button>").appendTo(column)
                 generateButton.click(generateMatches)
                 return false
             }
         )
 
-        $("#open").click
+        li = $("<li></li>").appendTo(navbar)
+        var openLink = $("<a href=\"#\">" + language["Open"] + "</a>").appendTo(li)
+        openLink.click
         (
             function ()
             {
@@ -52,13 +58,13 @@ $(document).ready
                 var row, column
                 row = $("<div class=\"row\"></div>").appendTo("#content")
                 column = $("<div class=\"col-md-12\"></div>").appendTo(row)
-                $("<h1>Spielplan öffnen</h1>").appendTo(column)
+                $("<h1>" + language["Open league schedule"] + "</h1>").appendTo(column)
                 row = $("<div class=\"row\"></div>").appendTo("#content")
                 column = $("<div class=\"col-md-12\"></div>").appendTo(row)
                 var formInline = $("<div class=\"form-inline\"></div>").appendTo(column)
                 $("<input class=\"form-control\" id=\"file\" type=\"file\" />").appendTo(formInline)
                 $(document.createTextNode(" ")).appendTo(formInline)
-                var openButton = $("<button class=\"btn btn-primary\">Spielplan öffnen</button>").appendTo(formInline)
+                var openButton = $("<button class=\"btn btn-primary\">" + language["Open league schedule"] + "</button>").appendTo(formInline)
                 openButton.click
                 (
                     function ()
@@ -82,7 +88,9 @@ $(document).ready
             }
         )
 
-        $("#save").click
+        li = $("<li></li>").appendTo(navbar)
+        var saveLink = $("<a download=\"schedule.json\" href=\"#\">" + language["Save"] + "</a>").appendTo(li)
+        saveLink.click
         (
             function (event)
             {
@@ -100,5 +108,9 @@ $(document).ready
                 }
             }
         )
+
+        $("<li><a href=\"https://github.com/Michi83/Spielplan-Manager/blob/master/README.md\" target=\"_blank\">" + language["Help"] + "</a></li>").appendTo(navbar)
+        $("#intro").html(language["Generates league schedules and tables for football (soccer) tournaments."])
+        newLink.click()
     }
 )

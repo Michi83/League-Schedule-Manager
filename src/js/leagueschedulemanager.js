@@ -1,15 +1,3 @@
-allCriteria = ["points", "goal difference", "goals", "away goals", "goal average", "won"]
-criteriumNames =
-{
-    "points": "Punkte",
-    "goal difference": "Tordifferenz",
-    "goals": "Tore",
-    "away goals": "Auswärtstore",
-    "goal average": "Torquotient",
-    "won": "Siege",
-    "head-to-head": "direkter Vergleich"
-}
-
 /*
  * Um einen Spielplan zu erstellen, geht man so vor:
  * - Den ersten Spieltag teilt man beliebig ein.
@@ -120,7 +108,7 @@ var compareTeams = function (team1, team2, criteria, statistics)
     for (var i = 0; i < criteria.length; i++)
     {
         var criterium = criteria[i]
-        if (criterium === "points")
+        if (criterium === "Points")
         {
             var points1 = 3 * statistics[team1].won + statistics[team1].drawn
             var points2 = 3 * statistics[team2].won + statistics[team2].drawn
@@ -129,7 +117,7 @@ var compareTeams = function (team1, team2, criteria, statistics)
                 return points1 - points2
             }
         }
-        else if (criterium === "goal difference")
+        else if (criterium === "Goal difference")
         {
             var goalDifference1 = statistics[team1].goalsFor - statistics[team1].goalsAgainst
             var goalDifference2 = statistics[team2].goalsFor - statistics[team2].goalsAgainst
@@ -138,7 +126,7 @@ var compareTeams = function (team1, team2, criteria, statistics)
                 return goalDifference1 - goalDifference2
             }
         }
-        else if (criterium === "goals")
+        else if (criterium === "Goals")
         {
             var goals1 = statistics[team1].goalsFor
             var goals2 = statistics[team2].goalsFor
@@ -147,7 +135,7 @@ var compareTeams = function (team1, team2, criteria, statistics)
                 return goals1 - goals2
             }
         }
-        else if (criterium === "away goals")
+        else if (criterium === "Away goals")
         {
             var awayGoals1 = statistics[team1].awayGoals
             var awayGoals2 = statistics[team2].awayGoals
@@ -156,7 +144,7 @@ var compareTeams = function (team1, team2, criteria, statistics)
                 return awayGoals1 - awayGoals2
             }
         }
-        else if (criterium === "goal average")
+        else if (criterium === "Goal average")
         {
             var goalAverage1 = statistics[team1].goalsFor / statistics[team1].goalsAgainst
             var goalAverage2 = statistics[team2].goalsFor / statistics[team2].goalsAgainst
@@ -173,7 +161,7 @@ var compareTeams = function (team1, team2, criteria, statistics)
                 return goalAverage1 - goalAverage2
             }
         }
-        else if (criterium === "won")
+        else if (criterium === "Matches won")
         {
             var won1 = statistics[team1].won
             var won2 = statistics[team2].won
@@ -188,7 +176,7 @@ var compareTeams = function (team1, team2, criteria, statistics)
 
 var calculateTable = function (matchday)
 {
-    var headToHeadIndex = criteria.indexOf("head-to-head")
+    var headToHeadIndex = criteria.indexOf("Head-to-head comparison")
     if (headToHeadIndex === -1)
     {
         var criteriaBefore = criteria
@@ -454,7 +442,7 @@ var calculateHeadToHeadTable = function (table, matchday)
 
 var calculateTableAfter = function (table, statistics)
 {
-    var criteriaAfter = criteria.slice(criteria.indexOf("head-to-head"))
+    var criteriaAfter = criteria.slice(criteria.indexOf("Head-to-head comparison"))
     for (var i = 0; i < table.length; i++)
     {
         var team1 = table[i]

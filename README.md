@@ -1,5 +1,5 @@
 # League Schedule Manager
-Genereates league schedules and league tables for football (soccer) tournaments.
+Generates league schedules and tables for football (soccer) tournaments.
 
 Demo: http://michi83.github.io/Spielplan-Manager/
 
