@@ -45,9 +45,9 @@ var updateTableControl = function (table)
     {
         var team = table[i]
         var tr = $("<tr></tr>").appendTo(tbody)
-        if (i === 0 || team.place !== table[i - 1].place)
+        if (i === 0 || team.position !== table[i - 1].position)
         {
-            $("<td>" + team.place + ".</td>").appendTo(tr)
+            $("<td>" + team.position + ".</td>").appendTo(tr)
         }
         else
         {

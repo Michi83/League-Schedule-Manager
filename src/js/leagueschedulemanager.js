@@ -250,7 +250,7 @@ var calculateTable = function (matchday)
                 table.push
                 (
                     {
-                        place: 1,
+                        position: 1,
                         team: team,
                         played: statistics[team].won + statistics[team].drawn + statistics[team].lost,
                         won: statistics[team].won,
@@ -276,11 +276,11 @@ var calculateTable = function (matchday)
                     var comparison = compareTeams(team1.team, team2.team, criteriaBefore, statistics)
                     if (comparison > 0)
                     {
-                        team2.place++
+                        team2.position++
                     }
                     else if (comparison < 0)
                     {
-                        team1.place++
+                        team1.position++
                     }
                 }
             }
@@ -289,7 +289,7 @@ var calculateTable = function (matchday)
             (
                 function (team1, team2)
                 {
-                    return team1.place - team2.place
+                    return team1.position - team2.position
                 }
             )
             if (headToHeadIndex !== -1)
@@ -298,7 +298,7 @@ var calculateTable = function (matchday)
                 // direkten Vergleich an.
                 for (var j = 0, k; j < table.length; j = k)
                 {
-                    for (k = j + 1; k < table.length && table[j].place === table[k].place; k++)
+                    for (k = j + 1; k < table.length && table[j].position === table[k].position; k++)
                     {
                     }
                     if (k - j > 1)
@@ -311,14 +311,14 @@ var calculateTable = function (matchday)
                 (
                     function (team1, team2)
                     {
-                        return team1.place - team2.place
+                        return team1.position - team2.position
                     }
                 )
                 // Und wir suchen noch mal nach gleichrangigen Mannschaften und
                 // wenden die Kriterien nach dem direkten Vergleich an.
                 for (var j = 0, k; j < table.length; j = k)
                 {
-                    for (k = j + 1; k < table.length && table[j].place === table[k].place; k++)
+                    for (k = j + 1; k < table.length && table[j].position === table[k].position; k++)
                     {
                     }
                     if (k - j > 1)
@@ -331,7 +331,7 @@ var calculateTable = function (matchday)
                 (
                     function (team1, team2)
                     {
-                        return team1.place - team2.place
+                        return team1.position - team2.position
                     }
                 )
             }
@@ -348,16 +348,16 @@ var calculateTable = function (matchday)
     // Platzveränderungen
     if (matchday > 0)
     {
-        var previousPlaces = {}
+        var previouspositions = {}
         for (var i = 0; i < previousTable.length; i++)
         {
             var team = previousTable[i]
-            previousPlaces[team.team] = team.place
+            previouspositions[team.team] = team.position
         }
         for (var i = 0; i < currentTable.length; i++)
         {
             var team = currentTable[i]
-            team.change = team.place - previousPlaces[team.team]
+            team.change = team.position - previouspositions[team.team]
         }
     }
     updateTableControl(currentTable)
@@ -420,11 +420,11 @@ var calculateHeadToHeadTable = function (table, matchday)
             var comparison = compareTeams(team1.team, team2.team, headToHeadCriteria, statistics)
             if (comparison > 0)
             {
-                team2.place++
+                team2.position++
             }
             else if (comparison < 0)
             {
-                team1.place++
+                team1.position++
             }
         }
     }
@@ -432,7 +432,7 @@ var calculateHeadToHeadTable = function (table, matchday)
     (
         function (team1, team2)
         {
-            return team1.place - team2.place
+            return team1.position - team2.position
         }
     )
     // Jetzt suchen wir noch mal nach gleichrangigen Mannschaften und wenden den
@@ -442,7 +442,7 @@ var calculateHeadToHeadTable = function (table, matchday)
     var i, j
     for (i = 0, j; i < table.length; i = j)
     {
-        for (j = i + 1; j < table.length && table[i].place === table[j].place; j++)
+        for (j = i + 1; j < table.length && table[i].position === table[j].position; j++)
         {
         }
         if (j - i > 1 && !(i === 0 && j === table.length))
@@ -464,11 +464,11 @@ var calculateTableAfter = function (table, statistics)
             var comparison = compareTeams(team1.team, team2.team, criteriaAfter, statistics)
             if (comparison > 0)
             {
-                team2.place++
+                team2.position++
             }
             else if (comparison < 0)
             {
-                team1.place++
+                team1.position++
             }
         }
     }

@@ -1,10 +1,43 @@
+# League Schedule Manager
+Genereates league schedules and league tables for football (soccer) tournaments.
+
+Demo: http://michi83.github.io/Spielplan-Manager/
+
+## Generate league schedule
+League Schedules for round-robin tournaments with any number of teams and rounds can be generated. There may be an odd number of teams. In this case, one team has a bye on each matchday. Teams will play at home and on the road alternately most of the time but not always.
+
+## Calculate league tables
+League tables can be sorted by the following criteria:
+* points
+* goal difference
+* goals
+* away goals
+* goal average
+* matches won
+* head-to-head comparison
+
+The user can choose which criteria are applied and the sequence in which they are applied.
+
+League tables will show the following statistics:
+* matches played
+* matches won
+* matches drawn
+* matches lost
+* goals for - goals against
+* goal difference
+* points
+* change in position since last matchday
+
+## Head-to-head comparisons
+In head-to-head comparisons a subtable is used, considering only matches between two of the tied teams. The subtable may be sorted by different criteria as the main table. If this does not completely resolve ties, then additional subtables are used for the remaining ties. This is repeated until either all ties are resolved or cannot be resolved any further.
+
 # Spielplan-Manager
-Erstellt Spielpläne und Tabellen für Deine Fußball-Liga.
+Erstellt Spielpläne und Tabellen für Fußballturniere.
 
 Demo: http://michi83.github.io/Spielplan-Manager/
 
 ## Spielplan generieren
-Es können Jeder-gegen-jeden-Turniere mit beliebig vielen Runden generiert werden. Die Anzahl der Mannschaften kann ungerade sein, in diesem Fall hat an jedem Spieltag eine Mannschaft spielfrei. Meistens, aber nicht immer, werden Mannschaften abwechselnd zu Hause und auswärts spielen.
+Es können Spielpläne für Jeder-gegen-jeden-Turniere mit beliebig vielen Mannschaften und Runden generiert werden. Die Anzahl der Mannschaften kann ungerade sein, in diesem Fall hat an jedem Spieltag eine Mannschaft spielfrei. Meistens, aber nicht immer, werden Mannschaften abwechselnd zu Hause und auswärts spielen.
 
 ## Tabellen berechnen
 Tabellen können nach folgenden Kriterien sortiert werden:
@@ -18,12 +51,12 @@ Tabellen können nach folgenden Kriterien sortiert werden:
 
 Der Benutzer kann wählen, welche Kriterien angewendet werden und in welcher Reihenfolge sie angewendet werden.
 
-Unabhängig von den gewählten Kriterien werden in den Tabellen folgende Statistiken angezeigt:
+In den Tabellen werden folgende Statistiken angezeigt:
 * Spiele
 * Siege
 * Unentschieden
 * Niederlagen
-* Tore : Gegentore
+* Tore - Gegentore
 * Tordifferenz
 * Punkte
 * Platzveränderung seit dem letzten Spieltag
