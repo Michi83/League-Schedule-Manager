@@ -31,6 +31,12 @@ League tables will show the following statistics:
 ## Head-to-head comparisons
 In head-to-head comparisons a subtable is used, considering only matches between two of the tied teams. The subtable may be sorted by different criteria as the main table. If this does not completely resolve ties, then additional subtables are used for the remaining ties. This is repeated until either all ties are resolved or cannot be resolved any further.
 
+## Technology
+League Schedule Manager is written entirely in client-side JavaScript. You can host it on your web server or just double-click index.html.
+
+### Browser compatibility
+Should run fine in the newest versions of Chrome and Firefox. Please keep in mind that this is a hobby project. I will not waste any of my precious spare time on ugly browser hacks.
+
 # Spielplan-Manager
 Erstellt Spielpläne und Tabellen für Fußballturniere.
 
@@ -63,3 +69,9 @@ In den Tabellen werden folgende Statistiken angezeigt:
 
 ### direkter Vergleich
 Beim direkten Vergleich wird eine Nebentabelle aufgestellt, in der nur Spiele zählen, in denen zwei der gleichrangigen Mannschaften gegeneinander gespielt haben. Die Nebentabelle kann nach anderen Kriterien sortiert werden als die Haupttabelle. Wenn sich die Gleichstände so nicht vollständig auflösen lassen, dann werden für die verbliebenen Gleichstände weitere Nebentabellen aufgestellt. Das wird so oft wiederholt, bis entweder alle Gleichstände aufgelöst sind oder sich nicht weiter auflösen lassen.
+
+## Technologie
+League Schedule Manager wurde vollständig in clientseitigem JavaScript geschrieben. Man kann es auf einem Webserver hosten oder einfach durch Doppelklick auf index.html starten.
+
+### Browser compatibility
+Sollte in den neuesten Versionen von Chrome und Firefox funktionieren. Bitte beachte, dass das ein Hobby-Projekt ist und ich keine wertvolle Freizeit für hässliche Browser-Hacks verschwenden werde.
