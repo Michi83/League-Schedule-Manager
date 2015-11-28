@@ -3,7 +3,7 @@ Generates league schedules and tables for football (soccer) tournaments.
 
 Demo: http://michi83.github.io/Spielplan-Manager/
 
-## Generate league schedule
+## Generate league schedules
 League Schedules for round-robin tournaments with any number of teams and rounds can be generated. There may be an odd number of teams. In this case, one team has a bye on each matchday. Teams will play at home and on the road alternately most of the time but not always.
 
 ## Calculate league tables
