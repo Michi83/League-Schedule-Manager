@@ -1,5 +1,41 @@
 languages = {}
 
+languages["Deutsch"] =
+{
+    "Add": "Hinzufügen",
+    "Away goals": "Auswärtstore",
+    "D": "U",
+    "GD": "TD",
+    "Generate league schedule": "Spielplan erzeugen",
+    "Generates league schedules and tables for football (soccer) tournaments.": "Erzeugt Spielpläne und Tabellen für Fußballturniere.",
+    "Goal average": "Torquotient",
+    "Goal difference": "Tordifferenz",
+    "Goals": "Tore",
+    "Head-to-head comparison": "Direkter Vergleich",
+    "Head-to-head criteria": "Kriterien im direkten Vergleich",
+    "Help": "Hilfe",
+    "L": "V",
+    "Matchday": "Spieltag",
+    "Matches won": "Siege",
+    "New": "Neu",
+    "New league schedule": "Neuer Spielplan",
+    "Number of rounds": "Anzahl Runden",
+    "Open": "Öffnen",
+    "Open league schedule": "Spielplan öffnen",
+    "Pld": "Sp",
+    "Points": "Punkte",
+    "Pos": "Plz",
+    "Pts": "Pkt",
+    "Remove": "Entfernen",
+    "Save": "Speichern",
+    "Settings": "Einstellungen",
+    "Table": "Tabelle",
+    "Team": "Mannschaft",
+    "Teams": "Mannschaften",
+    "Tiebreaker criteria": "Tabellenkriterien",
+    "W": "G",
+}
+
 languages["English"] =
 {
     "Add": "Add",
