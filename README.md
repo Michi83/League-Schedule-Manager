@@ -18,13 +18,15 @@ League tables can be sorted by the following criteria:
 
 The user can choose which criteria are applied and the sequence in which they are applied.
 
-League tables will show the following statistics:
+League tables can display the following statistics:
 * matches played
 * matches won
 * matches drawn
 * matches lost
 * goals for - goals against
+* away goals
 * goal difference
+* goal average
 * points
 * change in position since last matchday
 
@@ -57,13 +59,15 @@ Tabellen können nach folgenden Kriterien sortiert werden:
 
 Der Benutzer kann wählen, welche Kriterien angewendet werden und in welcher Reihenfolge sie angewendet werden.
 
-In den Tabellen werden folgende Statistiken angezeigt:
+In den Tabellen können folgende Statistiken angezeigt werden:
 * Spiele
 * Siege
 * Unentschieden
 * Niederlagen
 * Tore - Gegentore
+* Auswärtstore
 * Tordifferenz
+* Torquotient
 * Punkte
 * Platzveränderung seit dem letzten Spieltag
 

@@ -2,9 +2,12 @@ languages = {}
 
 languages["Deutsch"] =
 {
+    "AG": "AT",
     "Add": "Hinzufügen",
     "Away goals": "Auswärtstore",
+    "Change in position": "Platzänderung",
     "D": "U",
+    "GA": "TQ",
     "GD": "TD",
     "Generate league schedule": "Spielplan erzeugen",
     "Generates league schedules and tables for football (soccer) tournaments.": "Erzeugt Spielpläne und Tabellen für Fußballturniere.",
@@ -16,6 +19,9 @@ languages["Deutsch"] =
     "Help": "Hilfe",
     "L": "V",
     "Matchday": "Spieltag",
+    "Matches drawn": "Unentschieden",
+    "Matches lost": "Niederlagen",
+    "Matches played": "Spiele",
     "Matches won": "Siege",
     "New": "Neu",
     "New league schedule": "Neuer Spielplan",
@@ -30,6 +36,7 @@ languages["Deutsch"] =
     "Save": "Speichern",
     "Settings": "Einstellungen",
     "Table": "Tabelle",
+    "Table statistics": "Tabellenstatistiken",
     "Team": "Mannschaft",
     "Teams": "Mannschaften",
     "Tiebreaker criteria": "Tabellenkriterien",
@@ -38,9 +45,12 @@ languages["Deutsch"] =
 
 languages["English"] =
 {
+    "AG": "AG",
     "Add": "Add",
     "Away goals": "Away goals",
+    "Change in position": "Change in position",
     "D": "D",
+    "GA": "GA",
     "GD": "GD",
     "Generate league schedule": "Generate league schedule",
     "Generates league schedules and tables for football (soccer) tournaments.": "Generates league schedules and tables for football (soccer) tournaments.",
@@ -52,6 +62,9 @@ languages["English"] =
     "Help": "Help",
     "L": "L",
     "Matchday": "Matchday",
+    "Matches drawn": "Matches drawn",
+    "Matches lost": "Matches lost",
+    "Matches played": "Matches played",
     "Matches won": "Matches won",
     "New": "New",
     "New league schedule": "New league schedule",
@@ -66,6 +79,7 @@ languages["English"] =
     "Save": "Save",
     "Settings": "Settings",
     "Table": "Table",
+    "Table statistics": "Table statistics",
     "Team": "Team",
     "Teams": "Teams",
     "Tiebreaker criteria": "Tiebreaker criteria",

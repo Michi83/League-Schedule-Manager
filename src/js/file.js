@@ -38,6 +38,7 @@ $(document).ready
                 teamsInput.arrayControl({array: teams})
                 criteria = []
                 headToHeadCriteria = []
+                statistics = []
                 loadSettings()
                 row = $("<div class=\"row\"></div>").appendTo("#content")
                 column = $("<div class=\"col-md-12\"></div>").appendTo(row)
@@ -79,6 +80,7 @@ $(document).ready
                             matches = data.matches
                             criteria = data.criteria
                             headToHeadCriteria = data.headToHeadCriteria
+                            statistics = data.statistics
                             updateMatchdayControl()
                         }
                         reader.readAsText(file)

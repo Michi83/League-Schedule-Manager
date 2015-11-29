@@ -228,6 +228,11 @@ var calculateTable = function (matchday)
             for (var j = 0; j < teams.length; j++)
             {
                 var team = teams[j]
+                var goalAverage = statistics[team].goalsFor / statistics[team].goalsAgainst
+                if (isNaN(goalAverage))
+                {
+                    goalAverage = 1
+                }
                 table.push
                 (
                     {
@@ -239,7 +244,9 @@ var calculateTable = function (matchday)
                         lost: statistics[team].lost,
                         goalsFor: statistics[team].goalsFor,
                         goalsAgainst: statistics[team].goalsAgainst,
+                        awayGoals: statistics[team].awayGoals,
                         goalDifference: statistics[team].goalsFor - statistics[team].goalsAgainst,
+                        goalAverage: goalAverage,
                         points: 3 * statistics[team].won + statistics[team].drawn,
                     }
                 )
