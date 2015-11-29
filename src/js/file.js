@@ -98,7 +98,7 @@ $(document).ready
             {
                 try
                 {
-                    var data = {teams: teams, matches: matches, criteria: criteria, headToHeadCriteria: headToHeadCriteria}
+                    var data = {teams: teams, matches: matches, criteria: criteria, headToHeadCriteria: headToHeadCriteria, statistics: statistics}
                     data = JSON.stringify(data)
                     data = "data:application/json," + encodeURIComponent(data)
                     $(event.target).attr("href", data)
