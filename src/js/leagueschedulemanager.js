@@ -100,7 +100,7 @@ var compareTeams = function (team1, team2, criteria, statistics)
         if (criterium === "Points")
         {
             var points1 = points.win * statistics[team1].won + points.draw * statistics[team1].drawn + points.loss * statistics[team1].lost
-            var points2 = 3 * statistics[team2].won + statistics[team2].drawn
+            var points2 = points.win * statistics[team2].won + points.draw * statistics[team2].drawn + points.loss * statistics[team2].lost
             if (points1 !== points2)
             {
                 return points1 - points2
