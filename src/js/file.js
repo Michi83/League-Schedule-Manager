@@ -43,7 +43,14 @@ $(document).ready
                 row = $("<div class=\"row\"></div>").appendTo("#content")
                 column = $("<div class=\"col-md-12\"></div>").appendTo(row)
                 var generateButton = $("<button class=\"btn btn-primary\">" + language["Generate league schedule"] + "</button>").appendTo(column)
-                generateButton.click(generateMatches)
+                generateButton.click
+                (
+                    function ()
+                    {
+                        generateMatches()
+                        displayMatchdayMenu()
+                    }
+                )
                 return false
             }
         )
@@ -81,7 +88,7 @@ $(document).ready
                             criteria = data.criteria
                             headToHeadCriteria = data.headToHeadCriteria
                             statistics = data.statistics
-                            updateMatchdayControl()
+                            displayMatchdayMenu()
                         }
                         reader.readAsText(file)
                     }

@@ -1,4 +1,4 @@
-var updateTableControl = function (table)
+var displayTable = function (table)
 {
     $("#table").empty()
     var thead = $("<thead></thead>").appendTo("#table")

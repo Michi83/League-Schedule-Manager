@@ -67,8 +67,6 @@ var generateMatches = function ()
         }
         teams2 = [teams2[0], teams2[teams2.length - 1]].concat(teams2.slice(1, teams2.length - 1))
     }
-    $(".options").hide()
-    updateMatchdayControl()
 }
 
 /*
@@ -343,7 +341,7 @@ var calculateTable = function (matchday)
             team.change = team.position - previouspositions[team.team]
         }
     }
-    updateTableControl(currentTable)
+    displayTable(currentTable)
 }
 
 var calculateHeadToHeadTable = function (table, matchday)

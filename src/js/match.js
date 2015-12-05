@@ -1,4 +1,4 @@
-var loadMatchday = function (matchday)
+var displayMatchday = function (matchday)
 {
     $("#content").empty()
     var row = $("<div class=\"row\"></div>").appendTo("#content")
@@ -53,7 +53,7 @@ var loadMatchday = function (matchday)
     calculateTable(matchday)
 }
 
-var updateMatchdayControl = function ()
+var displayMatchdayMenu = function ()
 {
     $("#matchdays").empty()
     var buttonGroup = $("<div class=\"btn-group\"></div>").appendTo("#matchdays")
@@ -87,7 +87,7 @@ var updateMatchdayControl = function ()
                 {
                     $(".matchday-button").removeClass("active")
                     button.addClass("active")
-                    loadMatchday(i)
+                    displayMatchday(i)
                 }
             )
         }
