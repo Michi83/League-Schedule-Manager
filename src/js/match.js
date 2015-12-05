@@ -68,7 +68,7 @@ var displayMatchdayMenu = function ()
             var row = $("<div class=\"row\"></div>").appendTo("#content")
             var column = $("<div class=\"col-md-12\"></div>").appendTo(row)
             $("<h1>" + language["Settings"] + "</h1>").appendTo(column)
-            loadSettings()
+            displaySettings()
         }
     )
     var firstMatchdayButton

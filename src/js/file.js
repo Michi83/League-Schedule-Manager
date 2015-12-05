@@ -36,10 +36,11 @@ $(document).ready
                 $("<h2>" + language["Teams"] + "</h2>").appendTo(column)
                 var teamsInput = $("<div id=\"teams\"></div>").appendTo(column)
                 teamsInput.arrayControl({array: teams})
+                statistics = []
+                points = {win: 3, draw: 1, loss: 0}
                 criteria = []
                 headToHeadCriteria = []
-                statistics = []
-                loadSettings()
+                displaySettings()
                 row = $("<div class=\"row\"></div>").appendTo("#content")
                 column = $("<div class=\"col-md-12\"></div>").appendTo(row)
                 var generateButton = $("<button class=\"btn btn-primary\">" + language["Generate league schedule"] + "</button>").appendTo(column)
@@ -88,6 +89,7 @@ $(document).ready
                             criteria = data.criteria
                             headToHeadCriteria = data.headToHeadCriteria
                             statistics = data.statistics
+                            points = data.points
                             displayMatchdayMenu()
                         }
                         reader.readAsText(file)
@@ -105,7 +107,7 @@ $(document).ready
             {
                 try
                 {
-                    var data = {teams: teams, matches: matches, criteria: criteria, headToHeadCriteria: headToHeadCriteria, statistics: statistics}
+                    var data = {teams: teams, matches: matches, criteria: criteria, headToHeadCriteria: headToHeadCriteria, statistics: statistics, points: points}
                     data = JSON.stringify(data)
                     data = "data:application/json," + encodeURIComponent(data)
                     $(event.target).attr("href", data)

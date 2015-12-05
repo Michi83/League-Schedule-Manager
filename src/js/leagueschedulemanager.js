@@ -99,7 +99,7 @@ var compareTeams = function (team1, team2, criteria, statistics)
         var criterium = criteria[i]
         if (criterium === "Points")
         {
-            var points1 = 3 * statistics[team1].won + statistics[team1].drawn
+            var points1 = points.win * statistics[team1].won + points.draw * statistics[team1].drawn + points.loss * statistics[team1].lost
             var points2 = 3 * statistics[team2].won + statistics[team2].drawn
             if (points1 !== points2)
             {
@@ -245,7 +245,7 @@ var calculateTable = function (matchday)
                         awayGoals: statistics[team].awayGoals,
                         goalDifference: statistics[team].goalsFor - statistics[team].goalsAgainst,
                         goalAverage: goalAverage,
-                        points: 3 * statistics[team].won + statistics[team].drawn,
+                        points: points.win * statistics[team].won + points.draw * statistics[team].drawn + points.loss * statistics[team].lost,
                     }
                 )
             }
